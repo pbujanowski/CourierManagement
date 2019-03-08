@@ -1,0 +1,3 @@
+D:\Repozytoria\CourierManagement\CourierManagement.Models\CourierManagement.Models.csproj;x86
+D:\Repozytoria\CourierManagement\CourierManagement\CourierManagement.csproj;x86
+D:\Repozytoria\CourierManagement\CourierManagement\CourierManagement.ViewModels\CourierManagement.ViewModels.csproj;x86
