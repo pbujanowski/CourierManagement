@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CourierManagement.Core.Models
 {
     /// <summary>
-    /// Klasa modelu kuriera
+    /// Model kuriera
     /// </summary>
     public class Courier : Person, IDomainModel
     {

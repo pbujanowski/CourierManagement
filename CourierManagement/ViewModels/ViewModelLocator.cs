@@ -7,13 +7,23 @@ using GalaSoft.MvvmLight.Ioc;
 
 namespace CourierManagement.ViewModels
 {
+    /// <summary>
+    /// Lokalizator modelów widoku
+    /// </summary>
     [Windows.UI.Xaml.Data.Bindable]
     public class ViewModelLocator
     {
+        /// <summary>
+        /// Pole instancji lokalizatora modelu widoku
+        /// </summary>
         private static ViewModelLocator _current;
-
+        /// <summary>
+        /// Właściwość instancji lokalizatora modelu widoku
+        /// </summary>
         public static ViewModelLocator Current => _current ?? (_current = new ViewModelLocator());
-
+        /// <summary>
+        /// Konstruktor lokalizatora modelu widoku
+        /// </summary>
         private ViewModelLocator()
         {
             SimpleIoc.Default.Register(() => new NavigationServiceEx());
@@ -32,7 +42,11 @@ namespace CourierManagement.ViewModels
         public ShellViewModel ShellViewModel => SimpleIoc.Default.GetInstance<ShellViewModel>();
 
         public NavigationServiceEx NavigationService => SimpleIoc.Default.GetInstance<NavigationServiceEx>();
-
+        /// <summary>
+        /// Metoda rejestrująca modele widoku wraz z widokami
+        /// </summary>
+        /// <typeparam name="VM"></typeparam>
+        /// <typeparam name="V"></typeparam>
         public void Register<VM, V>()
             where VM : class
         {

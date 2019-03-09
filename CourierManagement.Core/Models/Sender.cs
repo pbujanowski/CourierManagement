@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CourierManagement.Core.Models
 {
     /// <summary>
-    /// Klasa modelu nadawcy
+    /// Model nadawcy przesyłki
     /// </summary>
     public class Sender : Person, IDomainModel
     {

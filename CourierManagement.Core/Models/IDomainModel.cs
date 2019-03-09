@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Models
 {
+    /// <summary>
+    /// Interfejs dla modeli
+    /// </summary>
     interface IDomainModel
     {
         int Id { get; set; }

@@ -6,6 +6,9 @@ namespace CourierManagement.Services
 {
     internal partial class ToastNotificationsService
     {
+        /// <summary>
+        /// Metoda wyświetlająca przykładowe powiadomienie w systemie Windows
+        /// </summary>
         public void ShowToastNotificationSample()
         {
             // Create the toast content

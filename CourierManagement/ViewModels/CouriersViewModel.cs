@@ -14,34 +14,48 @@ namespace CourierManagement.ViewModels
 {
     public class CouriersViewModel : ViewModelBase
     {
-        private SampleOrder _selected;
-
-        public SampleOrder Selected
+        /// <summary>
+        /// Prywatne pole dla aktualnie wybranego kuriera
+        /// </summary>
+        private Courier _selected;
+        /// <summary>
+        /// Właściwość dla aktualnie wybranego kuriera
+        /// </summary>
+        public Courier Selected
         {
             get { return _selected; }
             set { Set(ref _selected, value); }
         }
-
-        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
-
+        /// <summary>
+        /// Kolekcja przechowująca wszystkich kurierów
+        /// </summary>
+        public ObservableCollection<Courier> Couriers { get; private set; }
+        /// <summary>
+        /// Konstruktor modelu widoku kurierów
+        /// </summary>
         public CouriersViewModel()
         {
+            Couriers = new ObservableCollection<Courier>();
         }
-
+        /// <summary>
+        /// Asynchroniczne zadanie wczytujące wszystkich kurierów do kolekcji Couriers
+        /// </summary>
+        /// <param name="viewState"></param>
+        /// <returns></returns>
         public async Task LoadDataAsync(MasterDetailsViewState viewState)
         {
-            SampleItems.Clear();
-
-            var data = await SampleDataService.GetSampleModelDataAsync();
+            //SampleItems.Clear();
+            Couriers.Clear();
+            var data = await CourierService.GetCouriersAsync();
 
             foreach (var item in data)
             {
-                SampleItems.Add(item);
+                Couriers.Add(item);
             }
 
             if (viewState == MasterDetailsViewState.Both)
             {
-                Selected = SampleItems.First();
+                Selected = Couriers.First();
             }
         }
     }

@@ -9,13 +9,13 @@ namespace CourierManagement.Views
 {
     public sealed partial class CouriersDetailControl : UserControl
     {
-        public SampleOrder MasterMenuItem
+        public Courier MasterMenuItem
         {
-            get { return GetValue(MasterMenuItemProperty) as SampleOrder; }
+            get { return GetValue(MasterMenuItemProperty) as Courier; }
             set { SetValue(MasterMenuItemProperty, value); }
         }
 
-        public static readonly DependencyProperty MasterMenuItemProperty = DependencyProperty.Register("MasterMenuItem", typeof(SampleOrder), typeof(CouriersDetailControl), new PropertyMetadata(null, OnMasterMenuItemPropertyChanged));
+        public static readonly DependencyProperty MasterMenuItemProperty = DependencyProperty.Register("MasterMenuItem", typeof(Courier), typeof(CouriersDetailControl), new PropertyMetadata(null, OnMasterMenuItemPropertyChanged));
 
         public CouriersDetailControl()
         {

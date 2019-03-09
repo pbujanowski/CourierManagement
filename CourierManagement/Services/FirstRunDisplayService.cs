@@ -7,10 +7,16 @@ using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace CourierManagement.Services
 {
+    /// <summary>
+    /// Usługa dla okna dialogowego przy pierwszym uruchamianiu aplikacji
+    /// </summary>
     public static class FirstRunDisplayService
     {
         private static bool shown = false;
-
+        /// <summary>
+        /// Asynchroniczna metoda pokazująca okno dialogowe przy pierwszym uruchomieniu
+        /// </summary>
+        /// <returns></returns>
         internal static async Task ShowIfAppropriateAsync()
         {
             if (SystemInformation.IsFirstRun && !shown)
