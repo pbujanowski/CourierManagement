@@ -29,13 +29,12 @@ namespace CourierManagement.ViewModels
         /// <summary>
         /// Kolekcja przechowująca wszystkich kurierów
         /// </summary>
-        public ObservableCollection<Courier> Couriers { get; private set; }
+        public ObservableCollection<Courier> Couriers { get; private set; } = new ObservableCollection<Courier>();
         /// <summary>
         /// Konstruktor modelu widoku kurierów
         /// </summary>
         public CouriersViewModel()
         {
-            Couriers = new ObservableCollection<Courier>();
         }
         /// <summary>
         /// Asynchroniczne zadanie wczytujące wszystkich kurierów do kolekcji Couriers
@@ -49,14 +48,10 @@ namespace CourierManagement.ViewModels
             var data = await CourierService.GetCouriersAsync();
 
             foreach (var item in data)
-            {
                 Couriers.Add(item);
-            }
 
             if (viewState == MasterDetailsViewState.Both)
-            {
                 Selected = Couriers.First();
-            }
         }
     }
 }

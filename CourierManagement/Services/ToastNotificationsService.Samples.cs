@@ -25,12 +25,12 @@ namespace CourierManagement.Services
                         {
                             new AdaptiveText()
                             {
-                                Text = "Sample Toast Notification"
+                                Text = "Przykładowe powiadomienie"
                             },
 
                             new AdaptiveText()
                             {
-                                 Text = @"Click OK to see how activation from a toast notification can be handled in the ToastNotificationService."
+                                 Text = @"Naciśnij przycisk OK, aby zamknąć powiadomienie."
                             }
                         }
                     }

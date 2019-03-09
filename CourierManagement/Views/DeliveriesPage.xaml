@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="CourierManagement.Views.DeliveriesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid>
+            <controls:DataGrid
+                ItemsSource="{x:Bind ViewModel.Source}"
+                AutoGenerateColumns="False"
+                GridLinesVisibility="Horizontal">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Header="Nazwa" Binding="{Binding DisplayName}" />
+                    <controls:DataGridTextColumn Header="Nadawca" Binding="{Binding Sender.DisplayName}" />
+                    <controls:DataGridTextColumn Header="Odbiorca" Binding="{Binding Recipient.DisplayName}" />
+                    <controls:DataGridTextColumn Header="Data nadania" Binding="{Binding SentDate}" />
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
+        </Grid>
+    </Grid>
+</Page>

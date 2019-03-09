@@ -30,12 +30,18 @@ namespace CourierManagement.ViewModels
             SimpleIoc.Default.Register<ShellViewModel>();
             Register<MainViewModel, MainPage>();
             Register<CouriersViewModel, CouriersPage>();
+            Register<SendersViewModel, SendersPage>();
+            Register<DeliveriesViewModel, DeliveriesPage>();
             Register<SettingsViewModel, SettingsPage>();
         }
 
         public SettingsViewModel SettingsViewModel => SimpleIoc.Default.GetInstance<SettingsViewModel>();
 
         public CouriersViewModel CouriersViewModel => SimpleIoc.Default.GetInstance<CouriersViewModel>();
+
+        public SendersViewModel SendersViewModel => SimpleIoc.Default.GetInstance<SendersViewModel>();
+
+        public DeliveriesViewModel DeliveriesViewModel => SimpleIoc.Default.GetInstance<DeliveriesViewModel>();
 
         public MainViewModel MainViewModel => SimpleIoc.Default.GetInstance<MainViewModel>();
 

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CourierManagement.Core.Services
+namespace CourierManagement.Core.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -15,6 +15,7 @@ namespace CourierManagement.Core.Services
         public DbSet<Courier> Couriers { get; set; }
         public DbSet<Sender> Senders { get; set; }
         public DbSet<Recipient> Recipients { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(CONNECTION_STRING);
