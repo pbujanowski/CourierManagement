@@ -95,5 +95,6 @@
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}"
             BackButtonBehavior="Automatic"
             MasterHeaderTemplate="{StaticResource MinimalMasterHeaderTemplate}"/>
+        <Button Content="Dodaj kuriera" Command="{x:Bind ViewModel.AddCourierCommand}"/>
     </Grid>
 </Page>

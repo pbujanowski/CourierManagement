@@ -1,7 +1,7 @@
 ﻿using System;
-
+using CourierManagement.Services;
 using CourierManagement.ViewModels;
-
+using GalaSoft.MvvmLight.Messaging;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -19,6 +19,15 @@ namespace CourierManagement.Views
         {
             InitializeComponent();
             Loaded += CouriersPage_Loaded;
+            Messenger.Default.Register<NotificationMessage>(this, NotificationMessageReceived);
+        }
+
+        private async void NotificationMessageReceived(NotificationMessage message)
+        {
+            if (message.Notification == "AddCourier")
+            {
+                await WindowManagerService.Current.TryShowAsStandaloneAsync("Dodaj kuriera", typeof(CourierPage));
+            }
         }
 
         private async void CouriersPage_Loaded(object sender, RoutedEventArgs e)

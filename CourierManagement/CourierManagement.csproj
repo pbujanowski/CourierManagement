@@ -138,12 +138,16 @@
     <Compile Include="Services\WhatsNewDisplayService.cs" />
     <Compile Include="Services\WindowManagerService.cs" />
     <Compile Include="ViewModels\CouriersViewModel.cs" />
+    <Compile Include="ViewModels\CourierViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SendersViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\CourierPage.xaml.cs">
+      <DependentUpon>CourierPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DeliveriesPage.xaml.cs">
       <DependentUpon>DeliveriesPage.xaml</DependentUpon>
     </Compile>
@@ -199,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CourierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

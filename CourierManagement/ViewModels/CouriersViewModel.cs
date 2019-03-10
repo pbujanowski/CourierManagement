@@ -2,12 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using CourierManagement.Core.Models;
 using CourierManagement.Core.Services;
-
+using CourierManagement.Services;
 using GalaSoft.MvvmLight;
-
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 
 namespace CourierManagement.ViewModels
@@ -35,6 +36,7 @@ namespace CourierManagement.ViewModels
         /// </summary>
         public CouriersViewModel()
         {
+            AddCourierCommand = new RelayCommand(AddCourierExecute);
         }
         /// <summary>
         /// Asynchroniczne zadanie wczytujące wszystkich kurierów do kolekcji Couriers
@@ -52,6 +54,11 @@ namespace CourierManagement.ViewModels
 
             if (viewState == MasterDetailsViewState.Both)
                 Selected = Couriers.First();
+        }
+        public ICommand AddCourierCommand { get; set; }
+        private void AddCourierExecute()
+        {
+            Messenger.Default.Send(new NotificationMessage("AddCourier"));
         }
     }
 }
