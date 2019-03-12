@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace CourierManagement.Activation
 {
@@ -18,7 +17,7 @@ namespace CourierManagement.Activation
 
         public override async Task HandleAsync(object args)
         {
-            await HandleInternalAsync(args as T);
+            await HandleInternalAsync(args as T).ConfigureAwait(false);
         }
 
         public override bool CanHandle(object args)

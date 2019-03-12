@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using CourierManagement.Views;
-
+﻿using CourierManagement.Views;
 using Microsoft.Toolkit.Uwp.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace CourierManagement.Services
 {
@@ -13,7 +11,8 @@ namespace CourierManagement.Services
     /// </summary>
     public static class WhatsNewDisplayService
     {
-        private static bool shown = false;
+        private static bool shown;
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie wyświetlające okno dialogowe po aktualizacji aplikacji
         /// </summary>

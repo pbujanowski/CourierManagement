@@ -74,5 +74,5 @@
                     Margin="{StaticResource XSmallTopMargin}" />
             </StackPanel>
         </StackPanel>
-    </Grid>    
+    </Grid>
 </Page>

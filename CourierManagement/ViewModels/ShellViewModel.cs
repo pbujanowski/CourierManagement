@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
-
-using CourierManagement.Helpers;
+﻿using CourierManagement.Helpers;
 using CourierManagement.Services;
 using CourierManagement.Views;
-
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 using Windows.System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-
 using WinUI = Microsoft.UI.Xaml.Controls;
 
 namespace CourierManagement.ViewModels
@@ -51,19 +45,12 @@ namespace CourierManagement.ViewModels
 
         public ICommand ItemInvokedCommand => _itemInvokedCommand ?? (_itemInvokedCommand = new RelayCommand<WinUI.NavigationViewItemInvokedEventArgs>(OnItemInvoked));
 
-        public ShellViewModel()
-        {
-        }
-
         public void Initialize(Frame frame, WinUI.NavigationView navigationView, IList<KeyboardAccelerator> keyboardAccelerators)
         {
             _navigationView = navigationView;
             _keyboardAccelerators = keyboardAccelerators;
             NavigationService.Frame = frame;
-            NavigationService.NavigationFailed += (sender, e) =>
-            {
-                throw e.Exception;
-            };
+            NavigationService.NavigationFailed += (_, e) => throw e.Exception;
             NavigationService.Navigated += Frame_Navigated;
             _navigationView.BackRequested += OnBackRequested;
         }

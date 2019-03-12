@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-using Windows.ApplicationModel.Resources;
+﻿using Windows.ApplicationModel.Resources;
 
 namespace CourierManagement.Helpers
 {
@@ -10,9 +7,10 @@ namespace CourierManagement.Helpers
     /// </summary>
     internal static class ResourceExtensions
     {
-        private static ResourceLoader _resLoader = new ResourceLoader();
+        private static readonly ResourceLoader _resLoader = new ResourceLoader();
+
         /// <summary>
-        /// Metoda pozwalająca zwrócić przetłumaczoną wartość z zasobów, na podstawie klucza zasobu i domyślnego języka systemu Windows 
+        /// Metoda pozwalająca zwrócić przetłumaczoną wartość z zasobów, na podstawie klucza zasobu i domyślnego języka systemu Windows
         /// </summary>
         /// <param name="resourceKey"></param>
         /// <returns></returns>

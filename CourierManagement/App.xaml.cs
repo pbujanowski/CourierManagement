@@ -1,7 +1,5 @@
-﻿using System;
-
-using CourierManagement.Services;
-
+﻿using CourierManagement.Services;
+using System;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 
@@ -9,7 +7,7 @@ namespace CourierManagement
 {
     public sealed partial class App : Application
     {
-        private Lazy<ActivationService> _activationService;
+        private readonly Lazy<ActivationService> _activationService;
 
         private ActivationService ActivationService
         {
@@ -28,13 +26,13 @@ namespace CourierManagement
         {
             if (!args.PrelaunchActivated)
             {
-                await ActivationService.ActivateAsync(args);
+                await ActivationService.ActivateAsync(args).ConfigureAwait(false);
             }
         }
 
         protected override async void OnActivated(IActivatedEventArgs args)
         {
-            await ActivationService.ActivateAsync(args);
+            await ActivationService.ActivateAsync(args).ConfigureAwait(false);
         }
 
         private ActivationService CreateActivationService()

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-
-using CourierManagement.Helpers;
+﻿using CourierManagement.Helpers;
 using CourierManagement.Services;
-
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-
+using System.Windows.Input;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 
@@ -22,6 +18,7 @@ namespace CourierManagement.ViewModels
         /// Pole motywu aplikacji
         /// </summary>
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
+
         /// <summary>
         /// Właściwość motywu aplikacji
         /// </summary>
@@ -31,10 +28,12 @@ namespace CourierManagement.ViewModels
 
             set { Set(ref _elementTheme, value); }
         }
+
         /// <summary>
         /// Pole z opisem wersji aplikacji
         /// </summary>
         private string _versionDescription;
+
         /// <summary>
         /// Właściwość z opisem wersji aplikacji
         /// </summary>
@@ -44,10 +43,12 @@ namespace CourierManagement.ViewModels
 
             set { Set(ref _versionDescription, value); }
         }
+
         /// <summary>
         /// Pole komendy zmiany motywu
         /// </summary>
         private ICommand _switchThemeCommand;
+
         /// <summary>
         /// Właściwość komendy zmiany motywu
         /// </summary>
@@ -55,19 +56,15 @@ namespace CourierManagement.ViewModels
         {
             get
             {
-                if (_switchThemeCommand == null)
-                {
-                    _switchThemeCommand = new RelayCommand<ElementTheme>(
+                return _switchThemeCommand ?? (_switchThemeCommand = new RelayCommand<ElementTheme>(
                         async (param) =>
                         {
                             ElementTheme = param;
-                            await ThemeSelectorService.SetThemeAsync(param);
-                        });
-                }
-
-                return _switchThemeCommand;
+                            await ThemeSelectorService.SetThemeAsync(param).ConfigureAwait(false);
+                        }));
             }
         }
+
         /// <summary>
         /// Konstruktor modelu widoku ustawień
         /// </summary>
@@ -79,6 +76,7 @@ namespace CourierManagement.ViewModels
         {
             VersionDescription = GetVersionDescription();
         }
+
         /// <summary>
         /// Metoda zwracająca opis wersji aplikacji
         /// </summary>

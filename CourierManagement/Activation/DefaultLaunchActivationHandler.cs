@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using CourierManagement.Core.Helpers;
+﻿using CourierManagement.Core.Helpers;
 using CourierManagement.Services;
 using CourierManagement.ViewModels;
-
+using System;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 
 namespace CourierManagement.Activation
@@ -28,7 +26,7 @@ namespace CourierManagement.Activation
 
             // TODO WTS: Remove or change this sample which shows a toast notification when the app is launched.
             // You can use this sample to create toast notifications where needed in your app.
-            Singleton<ToastNotificationsService>.Instance.ShowToastNotificationSample();
+            await Singleton<ToastNotificationsService>.Instance.ShowToastNotificationSampleAsync().ConfigureAwait(false);
             await Task.CompletedTask;
         }
 

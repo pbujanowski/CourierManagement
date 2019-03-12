@@ -1,9 +1,7 @@
-﻿using System;
+﻿using CourierManagement.Core.Helpers;
+using System;
 using System.IO;
 using System.Threading.Tasks;
-
-using CourierManagement.Core.Helpers;
-
 using Windows.Storage;
 using Windows.Storage.Streams;
 
@@ -23,7 +21,7 @@ namespace CourierManagement.Helpers
         public static async Task SaveAsync<T>(this StorageFolder folder, string name, T content)
         {
             var file = await folder.CreateFileAsync(GetFileName(name), CreationCollisionOption.ReplaceExisting);
-            var fileContent = await Json.StringifyAsync(content);
+            var fileContent = await Json.StringifyAsync(content).ConfigureAwait(false);
 
             await FileIO.WriteTextAsync(file, fileContent);
         }
@@ -38,12 +36,12 @@ namespace CourierManagement.Helpers
             var file = await folder.GetFileAsync($"{name}.json");
             var fileContent = await FileIO.ReadTextAsync(file);
 
-            return await Json.ToObjectAsync<T>(fileContent);
+            return await Json.ToObjectAsync<T>(fileContent).ConfigureAwait(false);
         }
 
         public static async Task SaveAsync<T>(this ApplicationDataContainer settings, string key, T value)
         {
-            settings.SaveString(key, await Json.StringifyAsync(value));
+            settings.SaveString(key, await Json.StringifyAsync(value).ConfigureAwait(false));
         }
 
         public static void SaveString(this ApplicationDataContainer settings, string key, string value)
@@ -53,11 +51,9 @@ namespace CourierManagement.Helpers
 
         public static async Task<T> ReadAsync<T>(this ApplicationDataContainer settings, string key)
         {
-            object obj = null;
-
-            if (settings.Values.TryGetValue(key, out obj))
+            if (settings.Values.TryGetValue(key, out object obj))
             {
-                return await Json.ToObjectAsync<T>((string)obj);
+                return await Json.ToObjectAsync<T>((string)obj).ConfigureAwait(false);
             }
 
             return default(T);
@@ -84,11 +80,10 @@ namespace CourierManagement.Helpers
         {
             var item = await folder.TryGetItemAsync(fileName).AsTask().ConfigureAwait(false);
 
-            if ((item != null) && item.IsOfType(StorageItemTypes.File))
+            if (item?.IsOfType(StorageItemTypes.File) == true)
             {
                 var storageFile = await folder.GetFileAsync(fileName);
-                byte[] content = await storageFile.ReadBytesAsync();
-                return content;
+                return await storageFile.ReadBytesAsync().ConfigureAwait(false);
             }
 
             return null;

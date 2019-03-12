@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using CourierManagement.Views;
-
+﻿using CourierManagement.Views;
 using Microsoft.Toolkit.Uwp.Helpers;
+using System;
+using System.Threading.Tasks;
 
 namespace CourierManagement.Services
 {
@@ -12,7 +10,8 @@ namespace CourierManagement.Services
     /// </summary>
     public static class FirstRunDisplayService
     {
-        private static bool shown = false;
+        private static bool shown;
+
         /// <summary>
         /// Asynchroniczna metoda pokazująca okno dialogowe przy pierwszym uruchomieniu
         /// </summary>

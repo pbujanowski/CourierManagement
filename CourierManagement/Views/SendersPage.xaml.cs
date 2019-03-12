@@ -1,6 +1,4 @@
-﻿using System;
-
-using CourierManagement.ViewModels;
+﻿using CourierManagement.ViewModels;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,7 +21,7 @@ namespace CourierManagement.Views
 
         private async void SendersPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await ViewModel.LoadDataAsync(MasterDetailsViewControl.ViewState);
+            await ViewModel.LoadDataAsync(MasterDetailsViewControl.ViewState).ConfigureAwait(false);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

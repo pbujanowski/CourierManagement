@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Models
 {
@@ -15,8 +10,10 @@ namespace CourierManagement.Core.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
         [NotMapped]
         public string FullName { get { return $"{FirstName} {LastName}"; } }
+
         [NotMapped]
         public string DisplayName
         {
@@ -32,14 +29,18 @@ namespace CourierManagement.Core.Models
                     return string.Empty;
             }
         }
+
         public Gender Gender { get; set; }
         public string Company { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
+
         [DataType(DataType.PostalCode)]
         public string PostalCode { get; set; }
+
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
     }

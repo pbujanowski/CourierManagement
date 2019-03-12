@@ -130,6 +130,7 @@
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\FirstRunDisplayService.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\NavigationServiceEx.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="Services\ToastNotificationsService.cs" />
@@ -141,15 +142,20 @@
     <Compile Include="ViewModels\CourierViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\DeliveriesTrackingViewModel.cs" />
     <Compile Include="ViewModels\SendersViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\ViewModelNotificationMessages.cs" />
     <Compile Include="Views\CourierPage.xaml.cs">
       <DependentUpon>CourierPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DeliveriesPage.xaml.cs">
       <DependentUpon>DeliveriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeliveriesTrackingPage.xaml.cs">
+      <DependentUpon>DeliveriesTrackingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SendersPage.xaml.cs">
       <DependentUpon>SendersPage.xaml</DependentUpon>
@@ -214,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DeliveriesTrackingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SendersPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -260,6 +270,7 @@
     <Compile Include="Helpers\ResourceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\map.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -285,6 +296,9 @@
       <Project>{193D308C-D465-416C-A05C-8157DD80A6B4}</Project>
       <Name>CourierManagement.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Validators\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CourierManagement.Activation;
+using CourierManagement.Helpers;
+using System;
 using System.Threading.Tasks;
-
-using CourierManagement.Activation;
-
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Notifications;
+using Windows.UI.Popups;
 
 namespace CourierManagement.Services
 {
@@ -17,7 +17,7 @@ namespace CourierManagement.Services
         /// Metoda wyświetlająca powiadomienie w systemie Windows przekazane jako parametr
         /// </summary>
         /// <param name="toastNotification"></param>
-        public void ShowToastNotification(ToastNotification toastNotification)
+        public async Task ShowToastNotificationAsync(ToastNotification toastNotification)
         {
             try
             {
@@ -25,7 +25,8 @@ namespace CourierManagement.Services
             }
             catch (Exception)
             {
-                // TODO WTS: Adding ToastNotification can fail in rare conditions, please handle exceptions as appropriate to your scenario.
+                var dialog = new MessageDialog("ToastNotification_Error".GetLocalized());
+                await dialog.ShowAsync();
             }
         }
 

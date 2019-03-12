@@ -1,8 +1,6 @@
-﻿using System;
+﻿using CourierManagement.Helpers;
+using System;
 using System.Threading.Tasks;
-
-using CourierManagement.Helpers;
-
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -17,15 +15,17 @@ namespace CourierManagement.Services
     {
         private const string SettingsKey = "AppBackgroundRequestedTheme";
 
-        public static ElementTheme Theme { get; set; } = ElementTheme.Default;
+        public static ElementTheme Theme { get; set; }
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie inicjalizujące motyw na podstawie ustawień aplikacji
         /// </summary>
         /// <returns></returns>
         public static async Task InitializeAsync()
         {
-            Theme = await LoadThemeFromSettingsAsync();
+            Theme = await LoadThemeFromSettingsAsync().ConfigureAwait(false);
         }
+
         /// <summary>
         /// Asynchroniczne statycznie zadanie ustawiające motyw aplikacji
         /// </summary>
@@ -35,8 +35,8 @@ namespace CourierManagement.Services
         {
             Theme = theme;
 
-            await SetRequestedThemeAsync();
-            await SaveThemeInSettingsAsync(Theme);
+            await SetRequestedThemeAsync().ConfigureAwait(false);
+            await SaveThemeInSettingsAsync(Theme).ConfigureAwait(false);
         }
 
         public static async Task SetRequestedThemeAsync()
@@ -52,6 +52,7 @@ namespace CourierManagement.Services
                 });
             }
         }
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie wczytujące motyw z ustawień aplikacji
         /// </summary>
@@ -59,7 +60,7 @@ namespace CourierManagement.Services
         private static async Task<ElementTheme> LoadThemeFromSettingsAsync()
         {
             ElementTheme cacheTheme = ElementTheme.Default;
-            string themeName = await ApplicationData.Current.LocalSettings.ReadAsync<string>(SettingsKey);
+            string themeName = await ApplicationData.Current.LocalSettings.ReadAsync<string>(SettingsKey).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(themeName))
             {
@@ -68,6 +69,7 @@ namespace CourierManagement.Services
 
             return cacheTheme;
         }
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie zapisujące motyw w ustawieniach aplikacji
         /// </summary>
@@ -75,7 +77,7 @@ namespace CourierManagement.Services
         /// <returns></returns>
         private static async Task SaveThemeInSettingsAsync(ElementTheme theme)
         {
-            await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, theme.ToString());
+            await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, theme.ToString()).ConfigureAwait(false);
         }
     }
 }

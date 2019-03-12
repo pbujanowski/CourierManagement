@@ -9,10 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button Content="Accept" Command="{x:Bind ViewModel.AcceptCommand, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="732,526,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="401,304,0,0" Text="Imię: " TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="403,373,0,0" Text="Nazwisko: " TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="492,302,0,0" Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}" VerticalAlignment="Top" RenderTransformOrigin="-0.872,-0.737" Width="322"/>
-        <TextBox HorizontalAlignment="Left" Margin="492,371,0,0" Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" VerticalAlignment="Top" RenderTransformOrigin="-0.872,-0.737" Width="322"/>
+        <Button Content="Accept" Command="{x:Bind ViewModel.AcceptCommand, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="732,526,0,0" />
+        <TextBlock HorizontalAlignment="Left" Margin="401,304,0,0" Text="Imię: " TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Left" Margin="403,373,0,0" Text="Nazwisko: " TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBox HorizontalAlignment="Left" Margin="492,302,0,0" Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}" VerticalAlignment="Top" RenderTransformOrigin="-0.872,-0.737" Width="322" />
+        <TextBox HorizontalAlignment="Left" Margin="492,371,0,0" Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" VerticalAlignment="Top" RenderTransformOrigin="-0.872,-0.737" Width="322" />
     </Grid>
 </Page>

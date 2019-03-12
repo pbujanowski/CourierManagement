@@ -38,7 +38,7 @@ namespace CourierManagement.Services
         // You can use the resulting ViewLifeTileControl to interact with the new window.
         public async Task<ViewLifetimeControl> TryShowAsStandaloneAsync(string windowTitle, Type pageType)
         {
-            ViewLifetimeControl viewControl = await CreateViewLifetimeControlAsync(windowTitle, pageType);
+            ViewLifetimeControl viewControl = await CreateViewLifetimeControlAsync(windowTitle, pageType).ConfigureAwait(false);
             SecondaryViews.Add(viewControl);
             viewControl.StartViewInUse();
             var viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(viewControl.Id, ViewSizePreference.Default, ApplicationView.GetForCurrentView().Id, ViewSizePreference.Default);
@@ -49,7 +49,7 @@ namespace CourierManagement.Services
         // Displays a view in the specified view mode
         public async Task<ViewLifetimeControl> TryShowAsViewModeAsync(string windowTitle, Type pageType, ApplicationViewMode viewMode = ApplicationViewMode.Default)
         {
-            ViewLifetimeControl viewControl = await CreateViewLifetimeControlAsync(windowTitle, pageType);
+            ViewLifetimeControl viewControl = await CreateViewLifetimeControlAsync(windowTitle, pageType).ConfigureAwait(false);
             SecondaryViews.Add(viewControl);
             viewControl.StartViewInUse();
             var viewShown = await ApplicationViewSwitcher.TryShowAsViewModeAsync(viewControl.Id, viewMode);
@@ -66,8 +66,10 @@ namespace CourierManagement.Services
                 viewControl = ViewLifetimeControl.CreateForCurrentView();
                 viewControl.Title = windowTitle;
                 viewControl.StartViewInUse();
-                var frame = new Frame();
-                frame.RequestedTheme = ThemeSelectorService.Theme;
+                var frame = new Frame
+                {
+                    RequestedTheme = ThemeSelectorService.Theme
+                };
                 frame.Navigate(pageType, viewControl);
                 Window.Current.Content = frame;
                 Window.Current.Activate();

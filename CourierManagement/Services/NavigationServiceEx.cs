@@ -1,9 +1,7 @@
-﻿using System;
+﻿using CourierManagement.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using CourierManagement.Helpers;
-
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -13,9 +11,9 @@ namespace CourierManagement.Services
 {
     public class NavigationServiceEx
     {
-        public event NavigatedEventHandler Navigated;
+        public event EventHandler<NavigationEventArgs> Navigated;
 
-        public event NavigationFailedEventHandler NavigationFailed;
+        public event EventHandler<NavigationFailedEventArgs> NavigationFailed;
 
         private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
 
@@ -71,7 +69,7 @@ namespace CourierManagement.Services
                 }
             }
 
-            if (Frame.Content?.GetType() != page || (parameter != null && !parameter.Equals(_lastParamUsed)))
+            if (Frame.Content?.GetType() != page || (parameter?.Equals(_lastParamUsed) == false))
             {
                 var navigationResult = Frame.Navigate(page, parameter, infoOverride);
                 if (navigationResult)

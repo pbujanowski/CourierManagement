@@ -258,4 +258,26 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
     <value>Deliveries</value>
     <comment>Navigation view item name for Deliveries</comment>
   </data>
+  <data name="Shell_DeliveriesTracking.Content" xml:space="preserve">
+    <value>Deliveries tracking</value>
+    <comment>Navigation view item name for DeliveriesTracking</comment>
+  </data>
+  <data name="Map_YourLocation" xml:space="preserve">
+    <value>Your location</value>
+    <comment>Your location</comment>
+  </data>
+  <data name="ToastNotifications_Error" xml:space="preserve">
+    <value>Creating a new toast notification failed!</value>
+    <comment>Error message when creating a new toast notification failed</comment>
+  </data>
+  <data name="Courier_Add" xml:space="preserve">
+    <value>Add courier</value>
+    <comment>Title for add courier page</comment>
+  </data>
+  <data name="ErrorMessageTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="UnknownNotificationMessageReceived" xml:space="preserve">
+    <value>Unknown NotificationMessage value received!</value>
+  </data>
 </root>

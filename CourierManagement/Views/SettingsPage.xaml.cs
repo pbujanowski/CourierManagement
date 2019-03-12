@@ -1,6 +1,4 @@
-﻿using System;
-
-using CourierManagement.ViewModels;
+﻿using CourierManagement.ViewModels;
 
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;

@@ -1,12 +1,9 @@
-﻿using System;
+﻿using CourierManagement.Activation;
+using CourierManagement.Core.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using CourierManagement.Activation;
-using CourierManagement.Core.Helpers;
-using CourierManagement.Services;
-
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,7 +29,7 @@ namespace CourierManagement.Services
             if (IsInteractive(activationArgs))
             {
                 // Initialize things like registering background task before the app is loaded
-                await InitializeAsync();
+                await InitializeAsync().ConfigureAwait(false);
 
                 // Do not repeat app initialization when the Window already has content,
                 // just ensure that the window is active
@@ -48,7 +45,7 @@ namespace CourierManagement.Services
 
             if (activationHandler != null)
             {
-                await activationHandler.HandleAsync(activationArgs);
+                await activationHandler.HandleAsync(activationArgs).ConfigureAwait(false);
             }
 
             if (IsInteractive(activationArgs))
@@ -56,28 +53,28 @@ namespace CourierManagement.Services
                 var defaultHandler = new DefaultLaunchActivationHandler(_defaultNavItem);
                 if (defaultHandler.CanHandle(activationArgs))
                 {
-                    await defaultHandler.HandleAsync(activationArgs);
+                    await defaultHandler.HandleAsync(activationArgs).ConfigureAwait(false);
                 }
 
                 // Ensure the current window is active
                 Window.Current.Activate();
 
                 // Tasks after activation
-                await StartupAsync();
+                await StartupAsync().ConfigureAwait(false);
             }
         }
 
         private async Task InitializeAsync()
         {
             WindowManagerService.Current.Initialize();
-            await ThemeSelectorService.InitializeAsync();
+            await ThemeSelectorService.InitializeAsync().ConfigureAwait(false);
         }
 
         private async Task StartupAsync()
         {
-            await ThemeSelectorService.SetRequestedThemeAsync();
-            await FirstRunDisplayService.ShowIfAppropriateAsync();
-            await WhatsNewDisplayService.ShowIfAppropriateAsync();
+            await ThemeSelectorService.SetRequestedThemeAsync().ConfigureAwait(false);
+            await FirstRunDisplayService.ShowIfAppropriateAsync().ConfigureAwait(false);
+            await WhatsNewDisplayService.ShowIfAppropriateAsync().ConfigureAwait(false);
         }
 
         private IEnumerable<ActivationHandler> GetActivationHandlers()

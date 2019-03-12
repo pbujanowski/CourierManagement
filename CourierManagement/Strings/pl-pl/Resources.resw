@@ -241,4 +241,26 @@
     <value>Przesyłki</value>
     <comment>Navigation view item name for Deliveries</comment>
   </data>
+  <data name="Shell_DeliveriesTracking.Content" xml:space="preserve">
+    <value>Śledzenie przesyłek</value>
+    <comment>Navigation view item name for DeliveriesTracking</comment>
+  </data>
+  <data name="Map_YourLocation" xml:space="preserve">
+    <value>Twoja lokalizacja</value>
+    <comment>Twoja lokalizacja</comment>
+  </data>
+  <data name="ToastNotifications_Error" xml:space="preserve">
+    <value>Utworzenie nowego powiadomienia nie powiodło się!</value>
+    <comment>Error message when creating a new toast notification failed</comment>
+  </data>
+  <data name="Courier_Add" xml:space="preserve">
+    <value>Dodaj kuriera</value>
+    <comment>Tytuł dla okna dodającego kuriera</comment>
+  </data>
+  <data name="ErrorMessageTitle" xml:space="preserve">
+    <value>Błąd!</value>
+  </data>
+  <data name="UnknownNotificationMessageReceived" xml:space="preserve">
+    <value>Odebrano nieznaną wartość NotificationMessage!</value>
+  </data>
 </root>

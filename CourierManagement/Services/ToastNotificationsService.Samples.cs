@@ -1,5 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
-
+using System.Threading.Tasks;
 using Windows.UI.Notifications;
 
 namespace CourierManagement.Services
@@ -9,7 +9,7 @@ namespace CourierManagement.Services
         /// <summary>
         /// Metoda wyświetlająca przykładowe powiadomienie w systemie Windows
         /// </summary>
-        public void ShowToastNotificationSample()
+        public async Task ShowToastNotificationSampleAsync()
         {
             // Create the toast content
             var content = new ToastContent()
@@ -30,7 +30,7 @@ namespace CourierManagement.Services
 
                             new AdaptiveText()
                             {
-                                 Text = @"Naciśnij przycisk OK, aby zamknąć powiadomienie."
+                                 Text = "Naciśnij przycisk OK, aby zamknąć powiadomienie."
                             }
                         }
                     }
@@ -60,7 +60,7 @@ namespace CourierManagement.Services
             };
 
             // And show the toast
-            ShowToastNotification(toast);
+            await ShowToastNotificationAsync(toast).ConfigureAwait(false);
         }
     }
 }

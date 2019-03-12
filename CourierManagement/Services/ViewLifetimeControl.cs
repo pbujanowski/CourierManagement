@@ -1,7 +1,5 @@
-﻿using System;
-
-using CourierManagement.Helpers;
-
+﻿using CourierManagement.Helpers;
+using System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 
@@ -16,26 +14,28 @@ namespace CourierManagement.Services
     public sealed class ViewLifetimeControl
     {
         // Window for this particular view. Used to register and unregister for events
-        private CoreWindow _window;
-        private int _refCount = 0;
-        private bool _released = false;
+        private readonly CoreWindow _window;
 
-        private event ViewReleasedHandler InternalReleased;
+        private int _refCount = 0;
+        private bool _released;
+        private readonly object _lockObject = new object();
+
+        private event EventHandler<EventArgs> InternalReleased;
 
         // Necessary to communicate with the window
-        public CoreDispatcher Dispatcher { get; private set; }
+        public CoreDispatcher Dispatcher { get; }
 
         // This id is used in all of the ApplicationViewSwitcher and ProjectionManager APIs
-        public int Id { get; private set; }
+        public int Id { get; }
 
         public string Title { get; set; }
 
-        public event ViewReleasedHandler Released
+        public event EventHandler<EventArgs> Released
         {
             add
             {
                 bool releasedCopy = false;
-                lock (this)
+                lock (_lockObject)
                 {
                     releasedCopy = _released;
                     if (!_released)
@@ -52,7 +52,7 @@ namespace CourierManagement.Services
 
             remove
             {
-                lock (this)
+                lock (_lockObject)
                 {
                     InternalReleased -= value;
                 }
@@ -79,7 +79,7 @@ namespace CourierManagement.Services
             bool releasedCopy = false;
             int refCountCopy = 0;
 
-            lock (this)
+            lock (_lockObject)
             {
                 releasedCopy = _released;
                 if (!_released)
@@ -103,7 +103,7 @@ namespace CourierManagement.Services
             int refCountCopy = 0;
             bool releasedCopy = false;
 
-            lock (this)
+            lock (_lockObject)
             {
                 releasedCopy = _released;
                 if (!_released)
@@ -142,7 +142,7 @@ namespace CourierManagement.Services
         private void FinalizeRelease()
         {
             bool justReleased = false;
-            lock (this)
+            lock (_lockObject)
             {
                 if (_refCount == 0)
                 {

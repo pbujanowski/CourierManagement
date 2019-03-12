@@ -1,14 +1,12 @@
 ﻿using CourierManagement.Core.Data;
 using CourierManagement.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Services
 {
-    public class RecipientService
+    public static class RecipientService
     {
         /// <summary>
         /// Asynchroniczne statyczne zadanie pobierające wszystkich odbiorców z bazy danych
@@ -25,6 +23,7 @@ namespace CourierManagement.Core.Services
             }
             return data;
         }
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie dodające nowego odbiorcę do bazy danych
         /// </summary>
@@ -34,10 +33,11 @@ namespace CourierManagement.Core.Services
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                await dbContext.Recipients.AddAsync(recipient);
-                await dbContext.SaveChangesAsync();
+                await dbContext.Recipients.AddAsync(recipient).ConfigureAwait(false);
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie modyfikujące odbiorcę w bazie danych
         /// </summary>
@@ -48,9 +48,10 @@ namespace CourierManagement.Core.Services
             using (var dbContext = new ApplicationDbContext())
             {
                 dbContext.Recipients.Update(recipient);
-                await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
+
         /// <summary>
         /// Asynchroniczne statyczne zadanie usuwające odbiorcę z bazy danych
         /// </summary>
@@ -61,7 +62,7 @@ namespace CourierManagement.Core.Services
             using (var dbContext = new ApplicationDbContext())
             {
                 dbContext.Recipients.Remove(recipient);
-                await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
     }

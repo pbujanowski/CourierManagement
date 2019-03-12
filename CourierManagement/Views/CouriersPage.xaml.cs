@@ -1,7 +1,8 @@
-﻿using System;
+﻿using CourierManagement.Helpers;
 using CourierManagement.Services;
 using CourierManagement.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -24,15 +25,20 @@ namespace CourierManagement.Views
 
         private async void NotificationMessageReceived(NotificationMessage message)
         {
-            if (message.Notification == "AddCourier")
+            switch (message.Notification)
             {
-                await WindowManagerService.Current.TryShowAsStandaloneAsync("Dodaj kuriera", typeof(CourierPage));
+                case ViewModelNotificationMessages.COURIER_ADD:
+                    await WindowManagerService.Current.TryShowAsViewModeAsync(ViewModelNotificationMessages.COURIER_ADD.GetLocalized(), typeof(CourierPage)).ConfigureAwait(false);
+                    break;
+                default:
+                    var dialog = new MessageDialog("UnknownNotificationMessageReceived".GetLocalized(), "ErrorMessageTitle".GetLocalized());
+                    break;
             }
         }
 
         private async void CouriersPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await ViewModel.LoadDataAsync(MasterDetailsViewControl.ViewState);
+            await ViewModel.LoadDataAsync(MasterDetailsViewControl.ViewState).ConfigureAwait(false);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

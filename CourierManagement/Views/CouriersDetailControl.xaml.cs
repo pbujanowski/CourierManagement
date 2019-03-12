@@ -1,6 +1,4 @@
-﻿using System;
-
-using CourierManagement.Core.Models;
+﻿using CourierManagement.Core.Models;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
