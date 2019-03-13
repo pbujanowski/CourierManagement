@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Services
 {
-    public static class SenderService
+    public class SenderService : IDataService
     {
         /// <summary>
         /// Kolekcja zawierająca przykładowych nadawców
         /// </summary>
         /// <returns></returns>
-        private static IEnumerable<Sender> AllSenders()
+        private IEnumerable<Sender> AllSenders()
         {
             var data = new ObservableCollection<Sender>
             {
@@ -46,7 +46,7 @@ namespace CourierManagement.Core.Services
         /// Asynchroniczne statyczne zadanie pobierające wszystkich nadawców z bazy danych
         /// </summary>
         /// <returns></returns>
-        public static async Task<IEnumerable<Sender>> GetSendersAsync()
+        public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
             return AllSenders();
@@ -65,11 +65,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="sender"></param>
         /// <returns></returns>
-        public static async Task AddSenderAsync(Sender sender)
+        public async Task AddToDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                await dbContext.Senders.AddAsync(sender).ConfigureAwait(false);
+                await dbContext.Senders.AddAsync((Sender)model).ConfigureAwait(false);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -79,11 +79,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="sender"></param>
         /// <returns></returns>
-        public static async Task EditSenderAsync(Sender sender)
+        public async Task EditInDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Senders.Update(sender);
+                dbContext.Senders.Update((Sender)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -91,13 +91,13 @@ namespace CourierManagement.Core.Services
         /// <summary>
         /// Asynchroniczne statyczne zadanie usuwające nadawcę z bazy danych
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        public static async Task RemoveSenderAsync(Sender sender)
+        public async Task RemoveFromDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Senders.Remove(sender);
+                dbContext.Senders.Remove((Sender)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }

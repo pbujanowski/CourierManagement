@@ -141,6 +141,7 @@
     <Compile Include="ViewModels\CouriersViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
+    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesTrackingViewModel.cs" />
     <Compile Include="ViewModels\SendersViewModel.cs" />

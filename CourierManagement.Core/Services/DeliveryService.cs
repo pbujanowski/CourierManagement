@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Services
 {
-    public static class DeliveryService
+    public class DeliveryService : IDataService
     {
-        private static IEnumerable<Delivery> AllDeliveries()
+        private IEnumerable<Delivery> AllDeliveries()
         {
             var data = new ObservableCollection<Delivery>()
             {
@@ -47,7 +47,7 @@ namespace CourierManagement.Core.Services
         /// Asynchroniczne statyczne zadanie pobierające wszystkie przesyłki z bazy danych
         /// </summary>
         /// <returns></returns>
-        public static async Task<IEnumerable<Delivery>> GetDeliveriesAsync()
+        public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
             return AllDeliveries();
@@ -65,11 +65,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="delivery"></param>
         /// <returns></returns>
-        public static async Task AddDeliveryAsync(Delivery delivery)
+        public async Task AddToDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                await dbContext.Deliveries.AddAsync(delivery).ConfigureAwait(false);
+                await dbContext.Deliveries.AddAsync((Delivery)model).ConfigureAwait(false);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -79,11 +79,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="delivery"></param>
         /// <returns></returns>
-        public static async Task EditDeliveryAsync(Delivery delivery)
+        public async Task EditInDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Deliveries.Update(delivery);
+                dbContext.Deliveries.Update((Delivery)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -93,11 +93,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="delivery"></param>
         /// <returns></returns>
-        public static async Task RemoveDeliveryAsync(Delivery delivery)
+        public async Task RemoveFromDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Deliveries.Remove(delivery);
+                dbContext.Deliveries.Remove((Delivery)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }

@@ -6,7 +6,7 @@ namespace CourierManagement.Core.Models
     /// <summary>
     /// Model kuriera
     /// </summary>
-    public class Courier : Subject, IModel
+    public class Courier : Subject, IDataModel
     {
         [Key]
         [Required]

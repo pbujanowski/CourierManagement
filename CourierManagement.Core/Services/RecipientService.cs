@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Services
 {
-    public static class RecipientService
+    public class RecipientService : IDataService
     {
         /// <summary>
         /// Asynchroniczne statyczne zadanie pobierające wszystkich odbiorców z bazy danych
         /// </summary>
         /// <returns></returns>
-        public static async Task<IEnumerable<Recipient>> GetRecipientsAsync()
+        public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
             var data = new ObservableCollection<Recipient>();
@@ -29,11 +29,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="recipient"></param>
         /// <returns></returns>
-        public static async Task AddRecipientAsync(Recipient recipient)
+        public async Task AddToDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                await dbContext.Recipients.AddAsync(recipient).ConfigureAwait(false);
+                await dbContext.Recipients.AddAsync((Recipient)model).ConfigureAwait(false);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -43,11 +43,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="recipient"></param>
         /// <returns></returns>
-        public static async Task EditRecipientAsync(Recipient recipient)
+        public async Task EditInDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Recipients.Update(recipient);
+                dbContext.Recipients.Update((Recipient)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -57,11 +57,11 @@ namespace CourierManagement.Core.Services
         /// </summary>
         /// <param name="recipient"></param>
         /// <returns></returns>
-        public static async Task RemoveRecipientAsync(Recipient recipient)
+        public async Task RemoveFromDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Recipients.Remove(recipient);
+                dbContext.Recipients.Remove((Recipient)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }

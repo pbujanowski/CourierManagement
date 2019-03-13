@@ -12,7 +12,8 @@
         Margin="{StaticResource SmallLeftRightMargin}">
         <Grid>
             <controls:DataGrid
-                ItemsSource="{x:Bind ViewModel.Source}"
+                ItemsSource="{x:Bind ViewModel.Deliveries}"
+                SelectedItem="{x:Bind ViewModel.Selected}"
                 AutoGenerateColumns="False"
                 GridLinesVisibility="Horizontal">
                 <controls:DataGrid.Columns>

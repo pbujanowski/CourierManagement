@@ -1,11 +1,12 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CourierManagement.Core.Services;
+using GalaSoft.MvvmLight;
 
 namespace CourierManagement.ViewModels
 {
     /// <summary>
     /// Model widoku głównej zakładki
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, IViewModel
     {
         /// <summary>
         /// Konstruktor modelu widoku głównej zakładki
@@ -13,5 +14,7 @@ namespace CourierManagement.ViewModels
         public MainViewModel()
         {
         }
+
+        public IDataService DataService { get; set; }
     }
 }

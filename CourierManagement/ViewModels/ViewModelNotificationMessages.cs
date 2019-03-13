@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CourierManagement.ViewModels
+﻿namespace CourierManagement.ViewModels
 {
+    /// <summary>
+    /// Statyczna klasa przechowująca wiadomości dla komunikacji między modelami widoku a widokami
+    /// </summary>
     public static class ViewModelNotificationMessages
     {
+        /// <summary>
+        /// Stała komunikatu dla utworzenia nowego kuriera
+        /// </summary>
         public const string COURIER_ADD = "Courier_Add";
     }
 }

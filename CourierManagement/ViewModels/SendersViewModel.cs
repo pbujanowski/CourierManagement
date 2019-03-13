@@ -8,25 +8,41 @@ using System.Threading.Tasks;
 
 namespace CourierManagement.ViewModels
 {
-    public class SendersViewModel : ViewModelBase
+    public class SendersViewModel : ViewModelBase, IViewModel
     {
-        private Sender _selected;
+        public IDataService DataService { get; set; }
 
-        public Sender Selected
+        /// <summary>
+        /// Kolekcja z wszystkimi nadawcami
+        /// </summary>
+        public ObservableCollection<Sender> Senders { get; set; }
+
+        /// <summary>
+        /// Właściwość z aktualnie wybranym nadawcą w widoku
+        /// </summary>
+        public Sender Selected { get; set; }
+
+        /// <summary>
+        /// Konstruktor modelu widoku nadawców
+        /// </summary>
+        public SendersViewModel()
         {
-            get { return _selected; }
-            set { Set(ref _selected, value); }
+            DataService = new SenderService();
+            Senders = new ObservableCollection<Sender>();
         }
 
-        public ObservableCollection<Sender> Senders { get; } = new ObservableCollection<Sender>();
-
+        /// <summary>
+        /// Asynchroniczne zadanie wczytujące wszystkich nadawców do kolekcji
+        /// </summary>
+        /// <param name="viewState"></param>
+        /// <returns></returns>
         public async Task LoadDataAsync(MasterDetailsViewState viewState)
         {
             Senders.Clear();
-            var data = await SenderService.GetSendersAsync().ConfigureAwait(false);
+            var data = await DataService.GetAllFromDatabaseAsync().ConfigureAwait(false);
 
             foreach (var item in data)
-                Senders.Add(item);
+                Senders.Add((Sender)item);
 
             if (viewState == MasterDetailsViewState.Both)
                 Selected = Senders.First();

@@ -7,7 +7,7 @@ namespace CourierManagement.Core.Models
     /// <summary>
     /// Model przesyłki
     /// </summary>
-    public class Delivery : IModel
+    public class Delivery : IDataModel
     {
         [Key]
         [Required]

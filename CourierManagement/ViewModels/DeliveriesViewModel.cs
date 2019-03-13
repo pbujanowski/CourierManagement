@@ -2,38 +2,44 @@
 using CourierManagement.Core.Services;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace CourierManagement.ViewModels
 {
-    public class DeliveriesViewModel : ViewModelBase
+    public class DeliveriesViewModel : ViewModelBase, IViewModel
     {
-        private Delivery _selected;
-
-        public Delivery Selected
+        /// <summary>
+        /// Asynchroniczne zadanie uzupełniające kolekcję z wszystkimi przesyłkami
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetDeliveries()
         {
-            get { return _selected; }
-            set { Set(ref _selected, value); }
-        }
-
-        private ObservableCollection<Delivery> _source;
-
-        public ObservableCollection<Delivery> Source
-        {
-            get
-            {
-                GetDeliveries();
-                return _source;
-            }
-            set { Set(ref _source, value); }
-        }
-
-        private async void GetDeliveries()
-        {
-            (_source ?? (_source = new ObservableCollection<Delivery>())).Clear();
-
-            var data = await DeliveryService.GetDeliveriesAsync().ConfigureAwait(false);
+            Deliveries.Clear();
+            var data = await DataService.GetAllFromDatabaseAsync().ConfigureAwait(false);
             foreach (var item in data)
-                _source.Add(item);
+                Deliveries.Add((Delivery)item);
+        }
+
+        public IDataService DataService { get; set; }
+
+        /// <summary>
+        /// Kolekcja przechowująca wszystkie przesyłki
+        /// </summary>
+        public ObservableCollection<Delivery> Deliveries { get; set; }
+
+        /// <summary>
+        /// Właściwość aktualnie wybranej przesyłki w widoku
+        /// </summary>
+        public Delivery Selected { get; set; }
+
+        /// <summary>
+        /// Konstruktor modelu widoku przesyłek
+        /// </summary>
+        public DeliveriesViewModel()
+        {
+            DataService = new DeliveryService();
+            Deliveries = new ObservableCollection<Delivery>();
+            Task.Run(GetDeliveries).ConfigureAwait(false);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CourierManagement.Core.Models
     /// <summary>
     /// Model nadawcy przesyłki
     /// </summary>
-    public class Sender : Subject, IModel
+    public class Sender : Subject, IDataModel
     {
         [Key]
         [Required]

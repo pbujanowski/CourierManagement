@@ -6,7 +6,7 @@ namespace CourierManagement.Core.Models
     /// <summary>
     /// Model odbiorcy przesyłki
     /// </summary>
-    public class Recipient : Subject, IModel
+    public class Recipient : Subject, IDataModel
     {
         [Key]
         [Required]

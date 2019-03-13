@@ -30,6 +30,7 @@ namespace CourierManagement.Views
                 case ViewModelNotificationMessages.COURIER_ADD:
                     await WindowManagerService.Current.TryShowAsViewModeAsync(ViewModelNotificationMessages.COURIER_ADD.GetLocalized(), typeof(CourierPage)).ConfigureAwait(false);
                     break;
+
                 default:
                     var dialog = new MessageDialog("UnknownNotificationMessageReceived".GetLocalized(), "ErrorMessageTitle".GetLocalized());
                     break;

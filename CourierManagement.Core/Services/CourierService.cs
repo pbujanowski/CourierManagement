@@ -9,13 +9,13 @@ namespace CourierManagement.Core.Services
     /// <summary>
     /// Usługa dla modelu kuriera
     /// </summary>
-    public static class CourierService
+    public class CourierService : IDataService
     {
         /// <summary>
         /// Kolekcja zawierająca przykładowych kurierów
         /// </summary>
         /// <returns></returns>
-        private static IEnumerable<Courier> AllCouriers()
+        private IEnumerable<IDataModel> AllCouriers()
         {
             var data = new ObservableCollection<Courier>
             {
@@ -47,7 +47,7 @@ namespace CourierManagement.Core.Services
         /// Asynchroniczne zadanie zwracające kolekcję z wszystkimi kurierami z bazy danych
         /// </summary>
         /// <returns></returns>
-        public static async Task<IEnumerable<Courier>> GetCouriersAsync()
+        public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
 
@@ -58,11 +58,11 @@ namespace CourierManagement.Core.Services
         /// Asynchroniczne statyczne zadanie dodające nowego kuriera do bazy danych
         /// </summary>
         /// <param name="courier"></param>
-        public static async Task AddCourierAsync(Courier courier)
+        public async Task AddToDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                await dbContext.Couriers.AddAsync(courier).ConfigureAwait(false);
+                await dbContext.Couriers.AddAsync((Courier)model).ConfigureAwait(false);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -71,11 +71,11 @@ namespace CourierManagement.Core.Services
         /// Asynchroniczne statyczne zadanie modyfikujące istniejącego kuriera w bazie danych
         /// </summary>
         /// <param name="courier"></param>
-        public static async Task EditCourierAsync(Courier courier)
+        public async Task EditInDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Couriers.Update(courier);
+                dbContext.Couriers.Update((Courier)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }
@@ -84,11 +84,11 @@ namespace CourierManagement.Core.Services
         /// Asynchroniczne statyczne zadanie usuwające istniejącego kuriera z bazy danych
         /// </summary>
         /// <param name="courier"></param>
-        public static async Task RemoveCourierAsync(Courier courier)
+        public async Task RemoveFromDatabaseAsync(IDataModel model)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                dbContext.Couriers.Remove(courier);
+                dbContext.Couriers.Remove((Courier)model);
                 await dbContext.SaveChangesAsync().ConfigureAwait(false);
             }
         }

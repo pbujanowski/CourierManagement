@@ -5,7 +5,7 @@ namespace CourierManagement.Core.Models
     /// <summary>
     /// Interfejs dla modeli
     /// </summary>
-    internal interface IModel
+    public interface IDataModel
     {
         [Key]
         [Required]
