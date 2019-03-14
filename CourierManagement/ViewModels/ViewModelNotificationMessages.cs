@@ -8,6 +8,6 @@
         /// <summary>
         /// Stała komunikatu dla utworzenia nowego kuriera
         /// </summary>
-        public const string COURIER_ADD = "Courier_Add";
+        public const string CourierAddMessage = "Courier_Add";
     }
 }

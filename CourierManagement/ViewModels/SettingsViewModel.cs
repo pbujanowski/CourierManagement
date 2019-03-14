@@ -17,37 +17,37 @@ namespace CourierManagement.ViewModels
         /// <summary>
         /// Pole motywu aplikacji
         /// </summary>
-        private ElementTheme _elementTheme = ThemeSelectorService.Theme;
+        private ElementTheme elementTheme = ThemeSelectorService.Theme;
 
         /// <summary>
         /// Właściwość motywu aplikacji
         /// </summary>
         public ElementTheme ElementTheme
         {
-            get { return _elementTheme; }
+            get { return elementTheme; }
 
-            set { Set(ref _elementTheme, value); }
+            set { Set(ref elementTheme, value); }
         }
 
         /// <summary>
         /// Pole z opisem wersji aplikacji
         /// </summary>
-        private string _versionDescription;
+        private string versionDescription;
 
         /// <summary>
         /// Właściwość z opisem wersji aplikacji
         /// </summary>
         public string VersionDescription
         {
-            get { return _versionDescription; }
+            get { return versionDescription; }
 
-            set { Set(ref _versionDescription, value); }
+            set { Set(ref versionDescription, value); }
         }
 
         /// <summary>
         /// Pole komendy zmiany motywu
         /// </summary>
-        private ICommand _switchThemeCommand;
+        private ICommand switchThemeCommand;
 
         /// <summary>
         /// Właściwość komendy zmiany motywu
@@ -56,7 +56,7 @@ namespace CourierManagement.ViewModels
         {
             get
             {
-                return _switchThemeCommand ?? (_switchThemeCommand = new RelayCommand<ElementTheme>(
+                return switchThemeCommand ?? (switchThemeCommand = new RelayCommand<ElementTheme>(
                         async (param) =>
                         {
                             ElementTheme = param;

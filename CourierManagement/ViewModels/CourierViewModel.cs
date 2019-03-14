@@ -15,26 +15,26 @@ namespace CourierManagement.ViewModels
         /// <summary>
         /// Pole kontroli cyklu życia widoku
         /// </summary>
-        private ViewLifetimeControl _viewLifetimeControl;
+        private ViewLifetimeControl viewLifetimeControl;
 
         /// <summary>
         /// Pole kuriera dla widoku
         /// </summary>
-        private readonly Courier _courier;
+        private readonly Courier courier;
 
         public void Initialize(ViewLifetimeControl viewLifetimeControl)
         {
-            _viewLifetimeControl = viewLifetimeControl;
-            _viewLifetimeControl.Released += OnViewLifeTimeControlReleased;
+            this.viewLifetimeControl = viewLifetimeControl;
+            this.viewLifetimeControl.Released += OnViewLifeTimeControlReleased;
         }
 
         private async void OnViewLifeTimeControlReleased(object sender, EventArgs e)
         {
-            _viewLifetimeControl.Released -= OnViewLifeTimeControlReleased;
+            viewLifetimeControl.Released -= OnViewLifeTimeControlReleased;
             await WindowManagerService.Current.MainDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => WindowManagerService
                 .Current
                 .SecondaryViews
-                .Remove(_viewLifetimeControl));
+                .Remove(viewLifetimeControl));
         }
 
         /// <summary>
@@ -42,10 +42,10 @@ namespace CourierManagement.ViewModels
         /// </summary>
         public string FirstName
         {
-            get { return _courier.FirstName; }
+            get { return courier.FirstName; }
             set
             {
-                _courier.FirstName = value;
+                courier.FirstName = value;
                 RaisePropertyChanged(nameof(FirstName));
             }
         }
@@ -55,10 +55,10 @@ namespace CourierManagement.ViewModels
         /// </summary>
         public string LastName
         {
-            get { return _courier.LastName; }
+            get { return courier.LastName; }
             set
             {
-                _courier.LastName = value;
+                courier.LastName = value;
                 RaisePropertyChanged(nameof(LastName));
             }
         }
@@ -69,7 +69,7 @@ namespace CourierManagement.ViewModels
         public CourierViewModel()
         {
             DataService = new CourierService();
-            _courier = new Courier();
+            courier = new Courier();
             AcceptCommand = new RelayCommand(AcceptExecute);
         }
 

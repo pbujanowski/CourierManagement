@@ -144,6 +144,7 @@
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesTrackingViewModel.cs" />
+    <Compile Include="ViewModels\RecipientsViewModel.cs" />
     <Compile Include="ViewModels\SendersViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -158,11 +159,17 @@
     <Compile Include="Views\DeliveriesTrackingPage.xaml.cs">
       <DependentUpon>DeliveriesTrackingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SendersDetailControl.xaml.cs">
+      <DependentUpon>SendersDetailControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipientsPage.xaml.cs">
+      <DependentUpon>RecipientsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SendersPage.xaml.cs">
       <DependentUpon>SendersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SendersDetailControl.xaml.cs">
-      <DependentUpon>SendersDetailControl.xaml</DependentUpon>
+    <Compile Include="Views\RecipientsDetailControl.xaml.cs">
+      <DependentUpon>RecipientsDetailControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CouriersDetailControl.xaml.cs">
       <DependentUpon>CouriersDetailControl.xaml</DependentUpon>
@@ -225,11 +232,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\SendersDetailControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RecipientsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SendersPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SendersDetailControl.xaml">
+    <Page Include="Views\RecipientsDetailControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

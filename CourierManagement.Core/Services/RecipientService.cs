@@ -9,19 +9,54 @@ namespace CourierManagement.Core.Services
     public class RecipientService : IDataService
     {
         /// <summary>
+        /// Kolekcja zawierająca przykładowych odbiorców
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Recipient> AllRecipients()
+        {
+            var data = new ObservableCollection<Recipient>
+            {
+                new Recipient
+                {
+                    FirstName = "Pan",
+                    LastName = "Odbiorca",
+                    Company = "Firma Krzak",
+                    Address = "ul. Odbiorcza 1",
+                    City = "Gliwice",
+                    PostalCode = "44-100",
+                    PhoneNumber = "135-246-357",
+                    EmailAddress = "pan.odbiorca@mail.com"
+                },
+                new Recipient
+                {
+                    FirstName = "Pani",
+                    LastName = "Odbiorczyni",
+                    Company = "Firma Kogucik",
+                    Address = "ul. Odbiorcza 2",
+                    City = "Gliwice",
+                    PostalCode = "44-100",
+                    PhoneNumber = "246-357-468",
+                    EmailAddress = "pani.odbiorczyni@mail.com"
+                }
+            };
+            return data;
+        }
+
+        /// <summary>
         /// Asynchroniczne statyczne zadanie pobierające wszystkich odbiorców z bazy danych
         /// </summary>
         /// <returns></returns>
         public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
-            var data = new ObservableCollection<Recipient>();
-            using (var dbContext = new ApplicationDbContext())
-            {
-                foreach (var item in dbContext.Recipients)
-                    data.Add(item);
-            }
-            return data;
+            return AllRecipients();
+            //var data = new ObservableCollection<Recipient>();
+            //using (var dbContext = new ApplicationDbContext())
+            //{
+            //    foreach (var item in dbContext.Recipients)
+            //        data.Add(item);
+            //}
+            //return data;
         }
 
         /// <summary>

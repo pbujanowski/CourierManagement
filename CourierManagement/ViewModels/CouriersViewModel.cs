@@ -59,7 +59,7 @@ namespace CourierManagement.ViewModels
         /// </summary>
         private void AddCourierExecute()
         {
-            Messenger.Default.Send(new NotificationMessage(ViewModelNotificationMessages.COURIER_ADD));
+            Messenger.Default.Send(new NotificationMessage(ViewModelNotificationMessages.CourierAddMessage));
         }
     }
 }

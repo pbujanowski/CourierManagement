@@ -8,7 +8,7 @@ namespace CourierManagement.Core.Data
         /// <summary>
         /// Łańcuch połączenia z bazą danych (na razie pusty)
         /// </summary>
-        private const string CONNECTION_STRING = "";
+        private const string ConnectionString = "";
 
         public DbSet<Courier> Couriers { get; set; }
         public DbSet<Sender> Senders { get; set; }
@@ -17,7 +17,7 @@ namespace CourierManagement.Core.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(CONNECTION_STRING);
+            optionsBuilder.UseSqlServer(ConnectionString);
         }
     }
 }

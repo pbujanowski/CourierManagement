@@ -14,12 +14,12 @@ namespace CourierManagement.ViewModels
         /// <summary>
         /// Pole instancji lokalizatora modelu widoku
         /// </summary>
-        private static ViewModelLocator _current;
+        private static ViewModelLocator current;
 
         /// <summary>
         /// Właściwość instancji lokalizatora modelu widoku
         /// </summary>
-        public static ViewModelLocator Current => _current ?? (_current = new ViewModelLocator());
+        public static ViewModelLocator Current => current ?? (current = new ViewModelLocator());
 
         /// <summary>
         /// Konstruktor lokalizatora modelu widoku
@@ -32,6 +32,7 @@ namespace CourierManagement.ViewModels
             Register<CouriersViewModel, CouriersPage>();
             Register<CourierViewModel, CourierPage>();
             Register<SendersViewModel, SendersPage>();
+            Register<RecipientsViewModel, RecipientsPage>();
             Register<DeliveriesViewModel, DeliveriesPage>();
             Register<DeliveriesTrackingViewModel, DeliveriesTrackingPage>();
             Register<SettingsViewModel, SettingsPage>();
@@ -44,6 +45,8 @@ namespace CourierManagement.ViewModels
         public CourierViewModel CourierViewModel => SimpleIoc.Default.GetInstance<CourierViewModel>();
 
         public SendersViewModel SendersViewModel => SimpleIoc.Default.GetInstance<SendersViewModel>();
+
+        public RecipientsViewModel RecipientsViewModel => SimpleIoc.Default.GetInstance<RecipientsViewModel>();
 
         public DeliveriesViewModel DeliveriesViewModel => SimpleIoc.Default.GetInstance<DeliveriesViewModel>();
 

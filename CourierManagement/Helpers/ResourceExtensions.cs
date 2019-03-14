@@ -7,7 +7,7 @@ namespace CourierManagement.Helpers
     /// </summary>
     internal static class ResourceExtensions
     {
-        private static readonly ResourceLoader _resLoader = new ResourceLoader();
+        private static readonly ResourceLoader resLoader = new ResourceLoader();
 
         /// <summary>
         /// Metoda pozwalająca zwrócić przetłumaczoną wartość z zasobów, na podstawie klucza zasobu i domyślnego języka systemu Windows
@@ -16,7 +16,7 @@ namespace CourierManagement.Helpers
         /// <returns></returns>
         public static string GetLocalized(this string resourceKey)
         {
-            return _resLoader.GetString(resourceKey);
+            return resLoader.GetString(resourceKey);
         }
     }
 }

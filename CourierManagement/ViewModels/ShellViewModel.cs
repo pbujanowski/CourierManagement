@@ -17,50 +17,50 @@ namespace CourierManagement.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
-        private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
-        private readonly KeyboardAccelerator _backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
+        private readonly KeyboardAccelerator altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
+        private readonly KeyboardAccelerator backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
 
-        private bool _isBackEnabled;
-        private IList<KeyboardAccelerator> _keyboardAccelerators;
-        private WinUI.NavigationView _navigationView;
-        private WinUI.NavigationViewItem _selected;
-        private ICommand _loadedCommand;
-        private ICommand _itemInvokedCommand;
+        private bool isBackEnabled;
+        private IList<KeyboardAccelerator> keyboardAccelerators;
+        private WinUI.NavigationView navigationView;
+        private WinUI.NavigationViewItem selected;
+        private ICommand loadedCommand;
+        private ICommand itemInvokedCommand;
 
         public bool IsBackEnabled
         {
-            get { return _isBackEnabled; }
-            set { Set(ref _isBackEnabled, value); }
+            get { return isBackEnabled; }
+            set { Set(ref isBackEnabled, value); }
         }
 
         public static NavigationServiceEx NavigationService => ViewModelLocator.Current.NavigationService;
 
         public WinUI.NavigationViewItem Selected
         {
-            get { return _selected; }
-            set { Set(ref _selected, value); }
+            get { return selected; }
+            set { Set(ref selected, value); }
         }
 
-        public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new RelayCommand(OnLoaded));
+        public ICommand LoadedCommand => loadedCommand ?? (loadedCommand = new RelayCommand(OnLoaded));
 
-        public ICommand ItemInvokedCommand => _itemInvokedCommand ?? (_itemInvokedCommand = new RelayCommand<WinUI.NavigationViewItemInvokedEventArgs>(OnItemInvoked));
+        public ICommand ItemInvokedCommand => itemInvokedCommand ?? (itemInvokedCommand = new RelayCommand<WinUI.NavigationViewItemInvokedEventArgs>(OnItemInvoked));
 
         public void Initialize(Frame frame, WinUI.NavigationView navigationView, IList<KeyboardAccelerator> keyboardAccelerators)
         {
-            _navigationView = navigationView;
-            _keyboardAccelerators = keyboardAccelerators;
+            this.navigationView = navigationView;
+            this.keyboardAccelerators = keyboardAccelerators;
             NavigationService.Frame = frame;
             NavigationService.NavigationFailed += (_, e) => throw e.Exception;
             NavigationService.Navigated += Frame_Navigated;
-            _navigationView.BackRequested += OnBackRequested;
+            this.navigationView.BackRequested += OnBackRequested;
         }
 
         private void OnLoaded()
         {
             // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
             // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
-            _keyboardAccelerators.Add(_altLeftKeyboardAccelerator);
-            _keyboardAccelerators.Add(_backKeyboardAccelerator);
+            keyboardAccelerators.Add(altLeftKeyboardAccelerator);
+            keyboardAccelerators.Add(backKeyboardAccelerator);
         }
 
         private void OnItemInvoked(WinUI.NavigationViewItemInvokedEventArgs args)
@@ -71,7 +71,7 @@ namespace CourierManagement.ViewModels
                 return;
             }
 
-            var item = _navigationView.MenuItems
+            var item = navigationView.MenuItems
                             .OfType<WinUI.NavigationViewItem>()
                             .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
             var pageKey = item.GetValue(NavHelper.NavigateToProperty) as string;
@@ -88,11 +88,11 @@ namespace CourierManagement.ViewModels
             IsBackEnabled = NavigationService.CanGoBack;
             if (e.SourcePageType == typeof(SettingsPage))
             {
-                Selected = _navigationView.SettingsItem as WinUI.NavigationViewItem;
+                Selected = navigationView.SettingsItem as WinUI.NavigationViewItem;
                 return;
             }
 
-            Selected = _navigationView.MenuItems
+            Selected = navigationView.MenuItems
                             .OfType<WinUI.NavigationViewItem>()
                             .FirstOrDefault(menuItem => IsMenuItemForPageType(menuItem, e.SourcePageType));
         }
@@ -118,8 +118,7 @@ namespace CourierManagement.ViewModels
 
         private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
-            var result = NavigationService.GoBack();
-            args.Handled = result;
+            args.Handled = NavigationService.GoBack();
         }
     }
 }

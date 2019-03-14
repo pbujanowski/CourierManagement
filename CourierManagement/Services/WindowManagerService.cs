@@ -17,9 +17,9 @@ namespace CourierManagement.Services
     // More details about showing multiple views at https://docs.microsoft.com/windows/uwp/design/layout/show-multiple-views
     public class WindowManagerService
     {
-        private static WindowManagerService _current;
+        private static WindowManagerService current;
 
-        public static WindowManagerService Current => _current ?? (_current = new WindowManagerService());
+        public static WindowManagerService Current => current ?? (current = new WindowManagerService());
 
         // Contains all the opened secondary views.
         public ObservableCollection<ViewLifetimeControl> SecondaryViews { get; } = new ObservableCollection<ViewLifetimeControl>();

@@ -27,8 +27,8 @@ namespace CourierManagement.Views
         {
             switch (message.Notification)
             {
-                case ViewModelNotificationMessages.COURIER_ADD:
-                    await WindowManagerService.Current.TryShowAsViewModeAsync(ViewModelNotificationMessages.COURIER_ADD.GetLocalized(), typeof(CourierPage)).ConfigureAwait(false);
+                case ViewModelNotificationMessages.CourierAddMessage:
+                    await WindowManagerService.Current.TryShowAsViewModeAsync(ViewModelNotificationMessages.CourierAddMessage.GetLocalized(), typeof(CourierPage)).ConfigureAwait(false);
                     break;
 
                 default:

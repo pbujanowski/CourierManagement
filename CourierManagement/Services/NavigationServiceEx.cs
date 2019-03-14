@@ -15,28 +15,28 @@ namespace CourierManagement.Services
 
         public event EventHandler<NavigationFailedEventArgs> NavigationFailed;
 
-        private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Type> pages = new Dictionary<string, Type>();
 
-        private Frame _frame;
-        private object _lastParamUsed;
+        private Frame frame;
+        private object lastParamUsed;
 
         public Frame Frame
         {
             get
             {
-                if (_frame == null)
+                if (frame == null)
                 {
-                    _frame = Window.Current.Content as Frame;
+                    frame = Window.Current.Content as Frame;
                     RegisterFrameEvents();
                 }
 
-                return _frame;
+                return frame;
             }
 
             set
             {
                 UnregisterFrameEvents();
-                _frame = value;
+                frame = value;
                 RegisterFrameEvents();
             }
         }
@@ -61,20 +61,20 @@ namespace CourierManagement.Services
         public bool Navigate(string pageKey, object parameter = null, NavigationTransitionInfo infoOverride = null)
         {
             Type page;
-            lock (_pages)
+            lock (pages)
             {
-                if (!_pages.TryGetValue(pageKey, out page))
+                if (!pages.TryGetValue(pageKey, out page))
                 {
                     throw new ArgumentException(string.Format("ExceptionNavigationServiceExPageNotFound".GetLocalized(), pageKey), nameof(pageKey));
                 }
             }
 
-            if (Frame.Content?.GetType() != page || (parameter?.Equals(_lastParamUsed) == false))
+            if (Frame.Content?.GetType() != page || (parameter?.Equals(lastParamUsed) == false))
             {
                 var navigationResult = Frame.Navigate(page, parameter, infoOverride);
                 if (navigationResult)
                 {
-                    _lastParamUsed = parameter;
+                    lastParamUsed = parameter;
                 }
 
                 return navigationResult;
@@ -87,29 +87,29 @@ namespace CourierManagement.Services
 
         public void Configure(string key, Type pageType)
         {
-            lock (_pages)
+            lock (pages)
             {
-                if (_pages.ContainsKey(key))
+                if (pages.ContainsKey(key))
                 {
                     throw new ArgumentException(string.Format("ExceptionNavigationServiceExKeyIsInNavigationService".GetLocalized(), key));
                 }
 
-                if (_pages.Any(p => p.Value == pageType))
+                if (pages.Any(p => p.Value == pageType))
                 {
-                    throw new ArgumentException(string.Format("ExceptionNavigationServiceExTypeAlreadyConfigured".GetLocalized(), _pages.First(p => p.Value == pageType).Key));
+                    throw new ArgumentException(string.Format("ExceptionNavigationServiceExTypeAlreadyConfigured".GetLocalized(), pages.First(p => p.Value == pageType).Key));
                 }
 
-                _pages.Add(key, pageType);
+                pages.Add(key, pageType);
             }
         }
 
         public string GetNameOfRegisteredPage(Type page)
         {
-            lock (_pages)
+            lock (pages)
             {
-                if (_pages.ContainsValue(page))
+                if (pages.ContainsValue(page))
                 {
-                    return _pages.FirstOrDefault(p => p.Value == page).Key;
+                    return pages.FirstOrDefault(p => p.Value == page).Key;
                 }
                 else
                 {
@@ -120,19 +120,19 @@ namespace CourierManagement.Services
 
         private void RegisterFrameEvents()
         {
-            if (_frame != null)
+            if (frame != null)
             {
-                _frame.Navigated += Frame_Navigated;
-                _frame.NavigationFailed += Frame_NavigationFailed;
+                frame.Navigated += Frame_Navigated;
+                frame.NavigationFailed += Frame_NavigationFailed;
             }
         }
 
         private void UnregisterFrameEvents()
         {
-            if (_frame != null)
+            if (frame != null)
             {
-                _frame.Navigated -= Frame_Navigated;
-                _frame.NavigationFailed -= Frame_NavigationFailed;
+                frame.Navigated -= Frame_Navigated;
+                frame.NavigationFailed -= Frame_NavigationFailed;
             }
         }
 

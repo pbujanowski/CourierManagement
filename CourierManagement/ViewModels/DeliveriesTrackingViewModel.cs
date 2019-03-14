@@ -15,58 +15,58 @@ namespace CourierManagement.ViewModels
         // TODO WTS: Set your preferred default zoom level
         private const double DefaultZoomLevel = 17;
 
-        private readonly LocationService _locationService;
+        private readonly LocationService locationService;
 
         // TODO WTS: Set your preferred default location if a geolock can't be found.
-        private readonly BasicGeoposition _defaultPosition = new BasicGeoposition()
+        private readonly BasicGeoposition defaultPosition = new BasicGeoposition()
         {
             Latitude = 47.609425,
             Longitude = -122.3417
         };
 
-        private double _zoomLevel;
+        private double zoomLevel;
 
         public double ZoomLevel
         {
-            get { return _zoomLevel; }
-            set { Set(ref _zoomLevel, value); }
+            get { return zoomLevel; }
+            set { Set(ref zoomLevel, value); }
         }
 
-        private Geopoint _center;
+        private Geopoint center;
 
         public Geopoint Center
         {
-            get { return _center; }
-            set { Set(ref _center, value); }
+            get { return center; }
+            set { Set(ref center, value); }
         }
 
         public DeliveriesTrackingViewModel()
         {
-            _locationService = new LocationService();
-            Center = new Geopoint(_defaultPosition);
+            locationService = new LocationService();
+            Center = new Geopoint(defaultPosition);
             ZoomLevel = DefaultZoomLevel;
         }
 
         public async Task InitializeAsync(MapControl map)
         {
-            if (_locationService != null)
+            if (locationService != null)
             {
-                _locationService.PositionChanged += LocationService_PositionChanged;
+                locationService.PositionChanged += LocationService_PositionChanged;
 
-                var initializationSuccessful = await _locationService.InitializeAsync().ConfigureAwait(false);
+                var initializationSuccessful = await locationService.InitializeAsync().ConfigureAwait(false);
 
                 if (initializationSuccessful)
                 {
-                    await _locationService.StartListeningAsync().ConfigureAwait(false);
+                    await locationService.StartListeningAsync().ConfigureAwait(false);
                 }
 
-                if (initializationSuccessful && _locationService.CurrentPosition != null)
+                if (initializationSuccessful && locationService.CurrentPosition != null)
                 {
-                    Center = _locationService.CurrentPosition.Coordinate.Point;
+                    Center = locationService.CurrentPosition.Coordinate.Point;
                 }
                 else
                 {
-                    Center = new Geopoint(_defaultPosition);
+                    Center = new Geopoint(defaultPosition);
                 }
             }
 
@@ -101,10 +101,10 @@ namespace CourierManagement.ViewModels
 
         public override void Cleanup()
         {
-            if (_locationService != null)
+            if (locationService != null)
             {
-                _locationService.PositionChanged -= LocationService_PositionChanged;
-                _locationService.StopListening();
+                locationService.PositionChanged -= LocationService_PositionChanged;
+                locationService.StopListening();
             }
 
             base.Cleanup();

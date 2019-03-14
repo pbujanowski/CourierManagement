@@ -13,15 +13,15 @@ namespace CourierManagement.Services
     // For more information on application activation see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/activation.md
     internal class ActivationService
     {
-        private readonly App _app;
-        private readonly Lazy<UIElement> _shell;
-        private readonly Type _defaultNavItem;
+        private readonly App app;
+        private readonly Lazy<UIElement> shell;
+        private readonly Type defaultNavItem;
 
         public ActivationService(App app, Type defaultNavItem, Lazy<UIElement> shell = null)
         {
-            _app = app;
-            _shell = shell;
-            _defaultNavItem = defaultNavItem;
+            this.app = app;
+            this.shell = shell;
+            this.defaultNavItem = defaultNavItem;
         }
 
         public async Task ActivateAsync(object activationArgs)
@@ -36,7 +36,7 @@ namespace CourierManagement.Services
                 if (Window.Current.Content == null)
                 {
                     // Create a Frame to act as the navigation context and navigate to the first page
-                    Window.Current.Content = _shell?.Value ?? new Frame();
+                    Window.Current.Content = shell?.Value ?? new Frame();
                 }
             }
 
@@ -50,7 +50,7 @@ namespace CourierManagement.Services
 
             if (IsInteractive(activationArgs))
             {
-                var defaultHandler = new DefaultLaunchActivationHandler(_defaultNavItem);
+                var defaultHandler = new DefaultLaunchActivationHandler(defaultNavItem);
                 if (defaultHandler.CanHandle(activationArgs))
                 {
                     await defaultHandler.HandleAsync(activationArgs).ConfigureAwait(false);

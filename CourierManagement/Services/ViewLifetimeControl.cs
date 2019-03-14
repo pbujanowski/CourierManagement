@@ -14,11 +14,11 @@ namespace CourierManagement.Services
     public sealed class ViewLifetimeControl
     {
         // Window for this particular view. Used to register and unregister for events
-        private readonly CoreWindow _window;
+        private readonly CoreWindow window;
 
-        private int _refCount = 0;
-        private bool _released;
-        private readonly object _lockObject = new object();
+        private int refCount;
+        private bool released;
+        private readonly object lockObject = new object();
 
         private event EventHandler<EventArgs> InternalReleased;
 
@@ -35,10 +35,10 @@ namespace CourierManagement.Services
             add
             {
                 bool releasedCopy = false;
-                lock (_lockObject)
+                lock (lockObject)
                 {
-                    releasedCopy = _released;
-                    if (!_released)
+                    releasedCopy = released;
+                    if (!released)
                     {
                         InternalReleased += value;
                     }
@@ -52,7 +52,7 @@ namespace CourierManagement.Services
 
             remove
             {
-                lock (_lockObject)
+                lock (lockObject)
                 {
                     InternalReleased -= value;
                 }
@@ -62,8 +62,8 @@ namespace CourierManagement.Services
         private ViewLifetimeControl(CoreWindow newWindow)
         {
             Dispatcher = newWindow.Dispatcher;
-            _window = newWindow;
-            Id = ApplicationView.GetApplicationViewIdForWindow(_window);
+            window = newWindow;
+            Id = ApplicationView.GetApplicationViewIdForWindow(window);
             RegisterForEvents();
         }
 
@@ -79,12 +79,12 @@ namespace CourierManagement.Services
             bool releasedCopy = false;
             int refCountCopy = 0;
 
-            lock (_lockObject)
+            lock (lockObject)
             {
-                releasedCopy = _released;
-                if (!_released)
+                releasedCopy = released;
+                if (!released)
                 {
-                    refCountCopy = ++_refCount;
+                    refCountCopy = ++refCount;
                 }
             }
 
@@ -103,12 +103,12 @@ namespace CourierManagement.Services
             int refCountCopy = 0;
             bool releasedCopy = false;
 
-            lock (_lockObject)
+            lock (lockObject)
             {
-                releasedCopy = _released;
-                if (!_released)
+                releasedCopy = released;
+                if (!released)
                 {
-                    refCountCopy = --_refCount;
+                    refCountCopy = --refCount;
                     if (refCountCopy == 0)
                     {
                         var task = Dispatcher.RunAsync(CoreDispatcherPriority.Low, FinalizeRelease);
@@ -142,12 +142,12 @@ namespace CourierManagement.Services
         private void FinalizeRelease()
         {
             bool justReleased = false;
-            lock (_lockObject)
+            lock (lockObject)
             {
-                if (_refCount == 0)
+                if (refCount == 0)
                 {
                     justReleased = true;
-                    _released = true;
+                    released = true;
                 }
             }
 

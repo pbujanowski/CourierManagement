@@ -40,7 +40,7 @@
         <DataTemplate x:Key="NoSelectionContentTemplate">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <TextBlock
-                    x:Uid="Couriers_NoSelection"
+                    x:Uid="Senders_NoSelection"
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"

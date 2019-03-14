@@ -12,8 +12,8 @@ namespace CourierManagement.Behaviors
 {
     public class NavigationViewHeaderBehavior : Behavior<WinUI.NavigationView>
     {
-        private static NavigationViewHeaderBehavior _current;
-        private Page _currentPage;
+        private static NavigationViewHeaderBehavior current;
+        private Page currentPage;
 
         public DataTemplate DefaultHeaderTemplate { get; set; }
 
@@ -23,7 +23,7 @@ namespace CourierManagement.Behaviors
             set { SetValue(DefaultHeaderProperty, value); }
         }
 
-        public static readonly DependencyProperty DefaultHeaderProperty = DependencyProperty.Register("DefaultHeader", typeof(object), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (_, __) => _current.UpdateHeader()));
+        public static readonly DependencyProperty DefaultHeaderProperty = DependencyProperty.Register("DefaultHeader", typeof(object), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (_, __) => current.UpdateHeader()));
 
         public static NavigationViewHeaderMode GetHeaderMode(Page item)
         {
@@ -36,7 +36,7 @@ namespace CourierManagement.Behaviors
         }
 
         public static readonly DependencyProperty HeaderModeProperty =
-            DependencyProperty.RegisterAttached("HeaderMode", typeof(bool), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(NavigationViewHeaderMode.Always, (_, __) => _current.UpdateHeader()));
+            DependencyProperty.RegisterAttached("HeaderMode", typeof(bool), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(NavigationViewHeaderMode.Always, (_, __) => current.UpdateHeader()));
 
         public static object GetHeaderContext(Page item)
         {
@@ -49,7 +49,7 @@ namespace CourierManagement.Behaviors
         }
 
         public static readonly DependencyProperty HeaderContextProperty =
-            DependencyProperty.RegisterAttached("HeaderContext", typeof(object), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (_, __) => _current.UpdateHeader()));
+            DependencyProperty.RegisterAttached("HeaderContext", typeof(object), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (_, __) => current.UpdateHeader()));
 
         public static DataTemplate GetHeaderTemplate(Page item)
         {
@@ -62,12 +62,12 @@ namespace CourierManagement.Behaviors
         }
 
         public static readonly DependencyProperty HeaderTemplateProperty =
-            DependencyProperty.RegisterAttached("HeaderTemplate", typeof(DataTemplate), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (_, __) => _current.UpdateHeaderTemplate()));
+            DependencyProperty.RegisterAttached("HeaderTemplate", typeof(DataTemplate), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (_, __) => current.UpdateHeaderTemplate()));
 
         protected override void OnAttached()
         {
             base.OnAttached();
-            _current = this;
+            current = this;
             ViewModelLocator.Current.NavigationService.Navigated += OnNavigated;
         }
 
@@ -76,7 +76,7 @@ namespace CourierManagement.Behaviors
             var frame = sender as Frame;
             if (frame.Content is Page page)
             {
-                _currentPage = page;
+                currentPage = page;
 
                 UpdateHeader();
                 UpdateHeaderTemplate();
@@ -85,9 +85,9 @@ namespace CourierManagement.Behaviors
 
         private void UpdateHeader()
         {
-            if (_currentPage != null)
+            if (currentPage != null)
             {
-                var headerMode = GetHeaderMode(_currentPage);
+                var headerMode = GetHeaderMode(currentPage);
                 if (headerMode == NavigationViewHeaderMode.Never)
                 {
                     AssociatedObject.Header = null;
@@ -95,7 +95,7 @@ namespace CourierManagement.Behaviors
                 }
                 else
                 {
-                    var headerFromPage = GetHeaderContext(_currentPage);
+                    var headerFromPage = GetHeaderContext(currentPage);
                     AssociatedObject.Header = headerFromPage ?? DefaultHeader;
 
                     AssociatedObject.AlwaysShowHeader = headerMode == NavigationViewHeaderMode.Always;
@@ -105,9 +105,9 @@ namespace CourierManagement.Behaviors
 
         private void UpdateHeaderTemplate()
         {
-            if (_currentPage != null)
+            if (currentPage != null)
             {
-                var headerTemplate = GetHeaderTemplate(_currentPage);
+                var headerTemplate = GetHeaderTemplate(currentPage);
                 AssociatedObject.HeaderTemplate = headerTemplate ?? DefaultHeaderTemplate;
             }
         }

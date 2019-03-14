@@ -7,11 +7,11 @@ namespace CourierManagement
 {
     public sealed partial class App : Application
     {
-        private readonly Lazy<ActivationService> _activationService;
+        private readonly Lazy<ActivationService> activationService;
 
         private ActivationService ActivationService
         {
-            get { return _activationService.Value; }
+            get { return activationService.Value; }
         }
 
         public App()
@@ -19,7 +19,7 @@ namespace CourierManagement
             InitializeComponent();
 
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
-            _activationService = new Lazy<ActivationService>(CreateActivationService);
+            activationService = new Lazy<ActivationService>(CreateActivationService);
         }
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)

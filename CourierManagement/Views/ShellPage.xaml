@@ -34,6 +34,7 @@
             <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.MainViewModel" />
             <winui:NavigationViewItem x:Uid="Shell_Couriers" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.CouriersViewModel" />
             <winui:NavigationViewItem x:Uid="Shell_Senders" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.SendersViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_Recipients" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.RecipientsViewModel" />
             <winui:NavigationViewItem x:Uid="Shell_Deliveries" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.DeliveriesViewModel" />
             <winui:NavigationViewItem x:Uid="Shell_DeliveriesTracking" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.DeliveriesTrackingViewModel" />
         </winui:NavigationView.MenuItems>
