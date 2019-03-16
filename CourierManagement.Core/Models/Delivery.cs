@@ -16,8 +16,16 @@ namespace CourierManagement.Core.Models
         [NotMapped]
         public string DisplayName { get { return $"Przesyłka nr {Id}"; } }
 
+        [ForeignKey(nameof(Sender))]
+        [Required]
+        public int SenderId { get; set; }
+
         [Required]
         public Sender Sender { get; set; }
+
+        [ForeignKey(nameof(Recipient))]
+        [Required]
+        public int RecipientId { get; set; }
 
         [Required]
         public Recipient Recipient { get; set; }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -60,7 +61,7 @@ namespace CourierManagement.Services
                 Window.Current.Activate();
 
                 // Tasks after activation
-                await StartupAsync().ConfigureAwait(false);
+                await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => StartupAsync().ConfigureAwait(false));
             }
         }
 

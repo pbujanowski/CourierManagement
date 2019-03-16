@@ -1,4 +1,5 @@
-﻿using CourierManagement.Services;
+﻿using CourierManagement.Core.Data;
+using CourierManagement.Services;
 using System;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -14,10 +15,18 @@ namespace CourierManagement
             get { return activationService.Value; }
         }
 
+        private async void InitializeDatabase()
+        {
+            using (var dbContext = new ApplicationDbContext())
+            {
+                await dbContext.Database.EnsureCreatedAsync().ConfigureAwait(false);
+            }
+        }
+
         public App()
         {
             InitializeComponent();
-
+            InitializeDatabase();
             // Deferred execution until used. Check https://msdn.microsoft.com/library/dd642331(v=vs.110).aspx for further info on Lazy<T> class.
             activationService = new Lazy<ActivationService>(CreateActivationService);
         }

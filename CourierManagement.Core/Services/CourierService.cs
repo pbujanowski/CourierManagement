@@ -12,46 +12,20 @@ namespace CourierManagement.Core.Services
     public class CourierService : IDataService
     {
         /// <summary>
-        /// Kolekcja zawierająca przykładowych kurierów
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<IDataModel> AllCouriers()
-        {
-            var data = new ObservableCollection<Courier>
-            {
-                new Courier
-                {
-                    FirstName = "Jan",
-                    LastName = "Kowalski",
-                    Address = "ul. Jasna 1",
-                    City = "Gliwice",
-                    PostalCode = "44-100",
-                    PhoneNumber = "123-456-789",
-                    EmailAddress = "jan.kowalski@mail.com"
-                },
-                new Courier
-                {
-                    FirstName = "Janina",
-                    LastName = "Kowalska",
-                    Address = "ul. Ciemna 2",
-                    City = "Knurów",
-                    PostalCode = "44-193",
-                    PhoneNumber = "789-456-123",
-                    EmailAddress = "janina.kowalska@mail.com"
-                }
-            };
-            return data;
-        }
-
-        /// <summary>
         /// Asynchroniczne zadanie zwracające kolekcję z wszystkimi kurierami z bazy danych
         /// </summary>
         /// <returns></returns>
         public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
-
-            return AllCouriers();
+            //return AllCouriers();
+            var data = new ObservableCollection<Courier>();
+            using (var dbContext = new ApplicationDbContext())
+            {
+                foreach (var item in dbContext.Couriers)
+                    data.Add(item);
+            }
+            return data;
         }
 
         /// <summary>
