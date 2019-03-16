@@ -8,16 +8,18 @@ namespace CourierManagement.ViewModels
 {
     public class DeliveriesViewModel : ViewModelBase, IViewModel
     {
+        private readonly ObservableCollection<Delivery> deliveries;
+
         /// <summary>
         /// Asynchroniczne zadanie uzupełniające kolekcję z wszystkimi przesyłkami
         /// </summary>
         /// <returns></returns>
-        private async Task GetDeliveries()
+        private async void GetDeliveries()
         {
-            Deliveries.Clear();
-            var data = await DataService.GetAllFromDatabaseAsync().ConfigureAwait(false);
-            foreach (var item in data)
-                Deliveries.Add((Delivery)item);
+            deliveries.Clear();
+            var list = await DataService.GetAllFromDatabaseAsync().ConfigureAwait(false);
+            foreach (var item in list)
+                deliveries.Add((Delivery)item);
         }
 
         public IDataService DataService { get; set; }
@@ -25,7 +27,14 @@ namespace CourierManagement.ViewModels
         /// <summary>
         /// Kolekcja przechowująca wszystkie przesyłki
         /// </summary>
-        public ObservableCollection<Delivery> Deliveries { get; set; }
+        public ObservableCollection<Delivery> Deliveries
+        {
+            get
+            {
+                GetDeliveries();
+                return deliveries;
+            }
+        }
 
         /// <summary>
         /// Właściwość aktualnie wybranej przesyłki w widoku
@@ -38,8 +47,7 @@ namespace CourierManagement.ViewModels
         public DeliveriesViewModel()
         {
             DataService = new DeliveryService();
-            Deliveries = new ObservableCollection<Delivery>();
-            Task.Run(GetDeliveries).ConfigureAwait(false);
+            deliveries = new ObservableCollection<Delivery>();
         }
     }
 }

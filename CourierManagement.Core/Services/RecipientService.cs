@@ -2,6 +2,7 @@
 using CourierManagement.Core.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CourierManagement.Core.Services
@@ -15,14 +16,10 @@ namespace CourierManagement.Core.Services
         public async Task<IEnumerable<IDataModel>> GetAllFromDatabaseAsync()
         {
             await Task.CompletedTask;
-            //return AllRecipients();
-            var data = new ObservableCollection<Recipient>();
             using (var dbContext = new ApplicationDbContext())
             {
-                foreach (var item in dbContext.Recipients)
-                    data.Add(item);
+                return dbContext.Recipients.ToList();
             }
-            return data;
         }
 
         /// <summary>
