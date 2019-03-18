@@ -18,16 +18,19 @@ namespace CourierManagement.Core.Services
             await Task.CompletedTask;
             using (var dbContext = new ApplicationDbContext())
             {
-                var data = (from deliveries in dbContext.Deliveries
+                return (from deliveries in dbContext.Deliveries
                             join senders in dbContext.Senders on deliveries.SenderId equals senders.Id
                             join recipients in dbContext.Recipients on deliveries.RecipientId equals recipients.Id
+                            join couriers in dbContext.Couriers on deliveries.DeliveryCourierId equals couriers.Id
                             select new Delivery
                             {
                                 Id = deliveries.Id,
-                                SenderId = senders.Id,
+                                SenderId = deliveries.Id,
                                 Sender = deliveries.Sender,
-                                RecipientId = recipients.Id,
+                                RecipientId = deliveries.Id,
                                 Recipient = deliveries.Recipient,
+                                DeliveryCourierId = deliveries.DeliveryCourierId,
+                                DeliveryCourier = deliveries.DeliveryCourier,
                                 SentDate = deliveries.SentDate,
                                 ReceivedDate = deliveries.ReceivedDate,
                                 Cost = deliveries.Cost,
@@ -37,7 +40,6 @@ namespace CourierManagement.Core.Services
                                 Height = deliveries.Height,
                                 IsFragile = deliveries.IsFragile
                             }).ToList();
-                return data;
             }
         }
 

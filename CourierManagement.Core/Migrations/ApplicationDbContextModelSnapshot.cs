@@ -3,6 +3,7 @@ using System;
 using CourierManagement.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourierManagement.Core.Migrations
@@ -14,12 +15,40 @@ namespace CourierManagement.Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CourierManagement.Core.Models.Complaint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComplainedDeliveryId");
+
+                    b.Property<DateTime>("ComplaintDate");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<int>("Status");
+
+                    b.Property<DateTime>("SubmissionDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComplainedDeliveryId");
+
+                    b.ToTable("Complaints");
+                });
 
             modelBuilder.Entity("CourierManagement.Core.Models.Courier", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address");
 
@@ -82,13 +111,26 @@ namespace CourierManagement.Core.Migrations
             modelBuilder.Entity("CourierManagement.Core.Models.Delivery", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AcceptanceDate");
 
                     b.Property<decimal>("Cost");
 
+                    b.Property<int>("DeliveryCourierId");
+
                     b.Property<int>("Height");
 
+                    b.Property<decimal>("InsuranceCost");
+
                     b.Property<bool>("IsFragile");
+
+                    b.Property<bool>("IsInsured");
+
+                    b.Property<bool>("IsReceived");
+
+                    b.Property<bool>("IsSent");
 
                     b.Property<int>("Length");
 
@@ -108,6 +150,8 @@ namespace CourierManagement.Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DeliveryCourierId");
+
                     b.HasIndex("RecipientId");
 
                     b.HasIndex("SenderId");
@@ -118,9 +162,15 @@ namespace CourierManagement.Core.Migrations
                         new
                         {
                             Id = 1,
+                            AcceptanceDate = new DateTime(2019, 3, 18, 18, 0, 2, 617, DateTimeKind.Local).AddTicks(7256),
                             Cost = 100m,
+                            DeliveryCourierId = 1,
                             Height = 300,
+                            InsuranceCost = 0m,
                             IsFragile = false,
+                            IsInsured = false,
+                            IsReceived = false,
+                            IsSent = false,
                             Length = 200,
                             PaymentType = 0,
                             ReceivedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -133,9 +183,15 @@ namespace CourierManagement.Core.Migrations
                         new
                         {
                             Id = 2,
+                            AcceptanceDate = new DateTime(2019, 3, 18, 18, 0, 2, 624, DateTimeKind.Local).AddTicks(2201),
                             Cost = 50m,
+                            DeliveryCourierId = 2,
                             Height = 200,
+                            InsuranceCost = 0m,
                             IsFragile = true,
+                            IsInsured = false,
+                            IsReceived = false,
+                            IsSent = false,
                             Length = 1000,
                             PaymentType = 1,
                             ReceivedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -150,7 +206,8 @@ namespace CourierManagement.Core.Migrations
             modelBuilder.Entity("CourierManagement.Core.Models.Recipient", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address");
 
@@ -203,10 +260,34 @@ namespace CourierManagement.Core.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CourierManagement.Core.Models.Return", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AcceptanceDate");
+
+                    b.Property<decimal>("Cost");
+
+                    b.Property<int>("DeliveryId");
+
+                    b.Property<bool>("IsReturned");
+
+                    b.Property<DateTime>("ReturnDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryId");
+
+                    b.ToTable("Returns");
+                });
+
             modelBuilder.Entity("CourierManagement.Core.Models.Sender", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address");
 
@@ -259,8 +340,21 @@ namespace CourierManagement.Core.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CourierManagement.Core.Models.Complaint", b =>
+                {
+                    b.HasOne("CourierManagement.Core.Models.Delivery", "ComplainedDelivery")
+                        .WithMany()
+                        .HasForeignKey("ComplainedDeliveryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("CourierManagement.Core.Models.Delivery", b =>
                 {
+                    b.HasOne("CourierManagement.Core.Models.Courier", "DeliveryCourier")
+                        .WithMany()
+                        .HasForeignKey("DeliveryCourierId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CourierManagement.Core.Models.Recipient", "Recipient")
                         .WithMany()
                         .HasForeignKey("RecipientId")
@@ -269,6 +363,14 @@ namespace CourierManagement.Core.Migrations
                     b.HasOne("CourierManagement.Core.Models.Sender", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CourierManagement.Core.Models.Return", b =>
+                {
+                    b.HasOne("CourierManagement.Core.Models.Delivery", "Delivery")
+                        .WithMany()
+                        .HasForeignKey("DeliveryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

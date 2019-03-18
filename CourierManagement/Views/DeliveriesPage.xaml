@@ -20,6 +20,7 @@
                     <controls:DataGridTextColumn Header="Nazwa" Binding="{Binding DisplayName}" />
                     <controls:DataGridTextColumn Header="Nadawca" Binding="{Binding Sender.DisplayName}" />
                     <controls:DataGridTextColumn Header="Odbiorca" Binding="{Binding Recipient.DisplayName}" />
+                    <controls:DataGridTextColumn Header="Kurier dostarczający" Binding="{Binding Courier.FullName}" />
                     <controls:DataGridTextColumn Header="Data nadania" Binding="{Binding SentDate}" />
                 </controls:DataGrid.Columns>
             </controls:DataGrid>

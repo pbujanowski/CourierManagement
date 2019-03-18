@@ -5,8 +5,15 @@
     <RootNamespace>CourierManagement.Core</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190316083916_Initial.cs" />
+    <Compile Remove="Migrations\20190318103402_AddCourierToDeliveryModel.cs" />
+    <Compile Remove="Migrations\20190318112035_Initial.cs" />
+    <Compile Remove="Migrations\20190318143815_Initial.cs" />
+  </ItemGroup>
+
    <ItemGroup>
-     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.3" />
+     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
      <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
    </ItemGroup>
 </Project>

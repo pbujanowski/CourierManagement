@@ -30,16 +30,30 @@ namespace CourierManagement.Core.Models
         [Required]
         public Recipient Recipient { get; set; }
 
-        [DataType(DataType.Date)]
-        [Required]
+        [ForeignKey(nameof(DeliveryCourier))]
+        public int DeliveryCourierId { get; set; }
+
+        public Courier DeliveryCourier { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime AcceptanceDate { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime SentDate { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime ReceivedDate { get; set; }
+
+        [NotMapped]
+        public decimal TotalCost { get { return Cost + InsuranceCost; } }
 
         [DataType(DataType.Currency)]
         [Required]
         public decimal Cost { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Required]
+        public decimal InsuranceCost { get; set; }
 
         [Required]
         public DeliveryPaymentType PaymentType { get; set; }
@@ -58,5 +72,23 @@ namespace CourierManagement.Core.Models
 
         [Required]
         public bool IsFragile { get; set; }
+
+        [Required]
+        public bool IsInsured { get; set; }
+
+        [Required]
+        public bool IsSent { get; set; }
+
+        [Required]
+        public bool IsReceived { get; set; }
+
+        public Delivery()
+        {
+            AcceptanceDate = DateTime.Now;
+            IsFragile = false;
+            IsInsured = false;
+            IsSent = false;
+            IsReceived = false;
+        }
     }
 }
