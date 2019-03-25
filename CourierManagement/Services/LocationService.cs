@@ -15,14 +15,14 @@ namespace CourierManagement.Services
 
         public Geoposition CurrentPosition { get; private set; }
 
-        public Task<bool> InitializeAsync()
+        public async Task<bool> InitializeAsync()
         {
-            return InitializeAsync(100);
+            return await InitializeAsync(100).ConfigureAwait(false);
         }
 
-        public Task<bool> InitializeAsync(uint desiredAccuracyInMeters)
+        public async Task<bool> InitializeAsync(uint desiredAccuracyInMeters)
         {
-            return InitializeAsync(desiredAccuracyInMeters, (double)desiredAccuracyInMeters / 2);
+            return await InitializeAsync(desiredAccuracyInMeters, (double)desiredAccuracyInMeters / 2).ConfigureAwait(false);
         }
 
         public async Task<bool> InitializeAsync(uint desiredAccuracyInMeters, double movementThreshold)

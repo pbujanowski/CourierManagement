@@ -10,6 +10,7 @@
     <Compile Remove="Migrations\20190318103402_AddCourierToDeliveryModel.cs" />
     <Compile Remove="Migrations\20190318112035_Initial.cs" />
     <Compile Remove="Migrations\20190318143815_Initial.cs" />
+    <Compile Remove="Migrations\20190318170003_Initial.cs" />
   </ItemGroup>
 
    <ItemGroup>

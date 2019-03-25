@@ -3,9 +3,11 @@ using CourierManagement.Services;
 using GalaSoft.MvvmLight;
 using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Storage.Streams;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls.Maps;
 
 namespace CourierManagement.ViewModels
@@ -66,7 +68,7 @@ namespace CourierManagement.ViewModels
                 }
                 else
                 {
-                    Center = new Geopoint(defaultPosition);
+                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Center = new Geopoint(defaultPosition));
                 }
             }
 
@@ -74,7 +76,7 @@ namespace CourierManagement.ViewModels
             {
                 // TODO WTS: Set your map service token. If you don't have one, request from https://www.bingmapsportal.com/
                 // map.MapServiceToken = string.Empty;
-                AddMapIcon(map, Center, "Map_YourLocation".GetLocalized());
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => AddMapIcon(map, Center, "Map_YourLocation".GetLocalized()));
             }
         }
 

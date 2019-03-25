@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourierManagement.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190318170003_Initial")]
+    [Migration("20190325101705_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,7 +164,7 @@ namespace CourierManagement.Core.Migrations
                         new
                         {
                             Id = 1,
-                            AcceptanceDate = new DateTime(2019, 3, 18, 18, 0, 2, 617, DateTimeKind.Local).AddTicks(7256),
+                            AcceptanceDate = new DateTime(2019, 3, 25, 11, 17, 4, 772, DateTimeKind.Local).AddTicks(5404),
                             Cost = 100m,
                             DeliveryCourierId = 1,
                             Height = 300,
@@ -185,7 +185,7 @@ namespace CourierManagement.Core.Migrations
                         new
                         {
                             Id = 2,
-                            AcceptanceDate = new DateTime(2019, 3, 18, 18, 0, 2, 624, DateTimeKind.Local).AddTicks(2201),
+                            AcceptanceDate = new DateTime(2019, 3, 25, 11, 17, 4, 777, DateTimeKind.Local).AddTicks(1125),
                             Cost = 50m,
                             DeliveryCourierId = 2,
                             Height = 200,

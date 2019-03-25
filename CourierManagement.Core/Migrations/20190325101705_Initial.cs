@@ -26,10 +26,7 @@ namespace CourierManagement.Core.Migrations
                     Pesel = table.Column<string>(nullable: false),
                     Birthdate = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Couriers", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Couriers", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "Recipients",
@@ -47,10 +44,7 @@ namespace CourierManagement.Core.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     EmailAddress = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Recipients", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Recipients", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "Senders",
@@ -68,10 +62,7 @@ namespace CourierManagement.Core.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     EmailAddress = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Senders", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Senders", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "Deliveries",
@@ -196,12 +187,12 @@ namespace CourierManagement.Core.Migrations
             migrationBuilder.InsertData(
                 table: "Deliveries",
                 columns: new[] { "Id", "AcceptanceDate", "Cost", "DeliveryCourierId", "Height", "InsuranceCost", "IsFragile", "IsInsured", "IsReceived", "IsSent", "Length", "PaymentType", "ReceivedDate", "RecipientId", "SenderId", "SentDate", "Weight", "Width" },
-                values: new object[] { 1, new DateTime(2019, 3, 18, 18, 0, 2, 617, DateTimeKind.Local).AddTicks(7256), 100m, 1, 300, 0m, false, false, false, false, 200, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2019, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 2000, 250 });
+                values: new object[] { 1, new DateTime(2019, 3, 25, 11, 17, 4, 772, DateTimeKind.Local).AddTicks(5404), 100m, 1, 300, 0m, false, false, false, false, 200, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2019, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 2000, 250 });
 
             migrationBuilder.InsertData(
                 table: "Deliveries",
                 columns: new[] { "Id", "AcceptanceDate", "Cost", "DeliveryCourierId", "Height", "InsuranceCost", "IsFragile", "IsInsured", "IsReceived", "IsSent", "Length", "PaymentType", "ReceivedDate", "RecipientId", "SenderId", "SentDate", "Weight", "Width" },
-                values: new object[] { 2, new DateTime(2019, 3, 18, 18, 0, 2, 624, DateTimeKind.Local).AddTicks(2201), 50m, 2, 200, 0m, true, false, false, false, 1000, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2019, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000, 200 });
+                values: new object[] { 2, new DateTime(2019, 3, 25, 11, 17, 4, 777, DateTimeKind.Local).AddTicks(1125), 50m, 2, 200, 0m, true, false, false, false, 1000, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2019, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000, 200 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Complaints_ComplainedDeliveryId",

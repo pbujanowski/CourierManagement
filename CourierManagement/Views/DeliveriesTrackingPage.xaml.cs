@@ -20,8 +20,7 @@ namespace CourierManagement.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                ViewModel.InitializeAsync(mapControl).ConfigureAwait(false));
+            await ViewModel.InitializeAsync(mapControl).ConfigureAwait(false);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
