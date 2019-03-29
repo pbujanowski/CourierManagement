@@ -22,8 +22,8 @@ namespace CourierManagement.ViewModels
         // TODO WTS: Set your preferred default location if a geolock can't be found.
         private readonly BasicGeoposition defaultPosition = new BasicGeoposition()
         {
-            Latitude = 47.609425,
-            Longitude = -122.3417
+            Latitude = 50.2904235,
+            Longitude = 18.6667979
         };
 
         private double zoomLevel;
@@ -74,9 +74,11 @@ namespace CourierManagement.ViewModels
 
             if (map != null)
             {
-                // TODO WTS: Set your map service token. If you don't have one, request from https://www.bingmapsportal.com/
-                // map.MapServiceToken = string.Empty;
-                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => AddMapIcon(map, Center, "Map_YourLocation".GetLocalized()));
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    map.MapServiceToken = "MRGhNHkURhM3nXKl6vfz~vl-AJVE587dSBmETW3LrYQ~AjRLU7w1eidW1gP_EVhN4UahTdXwfr9uGHHNR_tsy-anMHGOt8zAogL5hzOnqcL9";
+                    AddMapIcon(map, Center, "Map_YourLocation".GetLocalized());
+                });
             }
         }
 

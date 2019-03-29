@@ -31,12 +31,12 @@
             Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
-            <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.MainViewModel" />
-            <winui:NavigationViewItem x:Uid="Shell_Couriers" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.CouriersViewModel" />
-            <winui:NavigationViewItem x:Uid="Shell_Senders" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.SendersViewModel" />
-            <winui:NavigationViewItem x:Uid="Shell_Recipients" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.RecipientsViewModel" />
-            <winui:NavigationViewItem x:Uid="Shell_Deliveries" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.DeliveriesViewModel" />
-            <winui:NavigationViewItem x:Uid="Shell_DeliveriesTracking" Icon="Document" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.DeliveriesTrackingViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_Main" Icon="Home" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.MainViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_Couriers" Icon="People" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.CouriersViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_Senders" Icon="ContactInfo" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.SendersViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_Recipients" Icon="ContactInfo" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.RecipientsViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_Deliveries" Icon="Mail" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.DeliveriesViewModel" />
+            <winui:NavigationViewItem x:Uid="Shell_DeliveriesTracking" Icon="Map" helpers:NavHelper.NavigateTo="CourierManagement.ViewModels.DeliveriesTrackingViewModel" />
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior
