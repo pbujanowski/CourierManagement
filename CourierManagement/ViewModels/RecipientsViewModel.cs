@@ -1,5 +1,5 @@
 ﻿using CourierManagement.Core.Models;
-using CourierManagement.Core.Services;
+using CourierManagement.DataAccess.Services;
 using GalaSoft.MvvmLight;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System.Collections.ObjectModel;

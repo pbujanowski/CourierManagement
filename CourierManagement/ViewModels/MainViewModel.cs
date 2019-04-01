@@ -1,4 +1,4 @@
-﻿using CourierManagement.Core.Services;
+﻿using CourierManagement.DataAccess.Services;
 using GalaSoft.MvvmLight;
 
 namespace CourierManagement.ViewModels

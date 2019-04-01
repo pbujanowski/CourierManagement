@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CourierManagement.Core\CourierManagement.Core.csproj" />
+    <ProjectReference Include="..\CourierManagement.DataAccess\CourierManagement.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

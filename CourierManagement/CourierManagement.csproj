@@ -308,13 +308,17 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CourierManagement.Core\CourierManagement.Core.csproj">
       <Project>{193D308C-D465-416C-A05C-8157DD80A6B4}</Project>
       <Name>CourierManagement.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validators\" />
+    <ProjectReference Include="..\CourierManagement.DataAccess\CourierManagement.DataAccess.csproj">
+      <Project>{57951bc0-ae91-42d7-969d-93a7c8d1dfd6}</Project>
+      <Name>CourierManagement.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

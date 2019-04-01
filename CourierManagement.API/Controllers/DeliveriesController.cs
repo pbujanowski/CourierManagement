@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CourierManagement.Core.Data;
 using CourierManagement.Core.Models;
+using CourierManagement.DataAccess.Data;
 
 namespace CourierManagement.API.Controllers
 {

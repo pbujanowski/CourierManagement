@@ -1,4 +1,4 @@
-﻿using CourierManagement.Core.Services;
+﻿using CourierManagement.DataAccess.Services;
 
 namespace CourierManagement.ViewModels
 {

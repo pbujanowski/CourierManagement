@@ -1,5 +1,5 @@
 ﻿using CourierManagement.Core.Models;
-using CourierManagement.Core.Services;
+using CourierManagement.DataAccess.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

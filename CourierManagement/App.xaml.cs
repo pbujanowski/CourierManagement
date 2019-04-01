@@ -1,4 +1,4 @@
-﻿using CourierManagement.Core.Data;
+﻿using CourierManagement.DataAccess.Data;
 using CourierManagement.Services;
 using System;
 using Windows.ApplicationModel.Activation;
