@@ -23,39 +23,24 @@ namespace CourierManagement.API.Controllers
 
         // GET: api/Deliveries
         [HttpGet]
-        public IEnumerable<Delivery> GetDeliveries()
+        public async Task<ActionResult<IEnumerable<Delivery>>> GetDeliveries()
         {
-            return context.Deliveries;
+            return await context.Deliveries.ToListAsync().ConfigureAwait(false);
         }
 
         // GET: api/Deliveries/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDelivery([FromRoute] int id)
+        public async Task<ActionResult<Delivery>> GetDelivery(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var delivery = await context.Deliveries.FindAsync(id).ConfigureAwait(false);
 
-            if (delivery == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(delivery);
+            return delivery == null ? (ActionResult<Delivery>)NotFound() : (ActionResult<Delivery>)delivery;
         }
 
         // PUT: api/Deliveries/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDelivery([FromRoute] int id, [FromBody] Delivery delivery)
+        public async Task<IActionResult> PutDelivery(int id, Delivery delivery)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != delivery.Id)
             {
                 return BadRequest();
@@ -84,13 +69,8 @@ namespace CourierManagement.API.Controllers
 
         // POST: api/Deliveries
         [HttpPost]
-        public async Task<IActionResult> PostDelivery([FromBody] Delivery delivery)
+        public async Task<ActionResult<Delivery>> PostDelivery(Delivery delivery)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             context.Deliveries.Add(delivery);
             await context.SaveChangesAsync().ConfigureAwait(false);
 
@@ -99,13 +79,8 @@ namespace CourierManagement.API.Controllers
 
         // DELETE: api/Deliveries/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDelivery([FromRoute] int id)
+        public async Task<ActionResult<Delivery>> DeleteDelivery(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var delivery = await context.Deliveries.FindAsync(id).ConfigureAwait(false);
             if (delivery == null)
             {
@@ -115,7 +90,7 @@ namespace CourierManagement.API.Controllers
             context.Deliveries.Remove(delivery);
             await context.SaveChangesAsync().ConfigureAwait(false);
 
-            return Ok(delivery);
+            return delivery;
         }
 
         private bool DeliveryExists(int id)
