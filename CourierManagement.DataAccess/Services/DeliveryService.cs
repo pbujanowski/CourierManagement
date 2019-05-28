@@ -1,7 +1,6 @@
 ﻿using CourierManagement.Core.Models;
 using CourierManagement.DataAccess.Data;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,27 +18,27 @@ namespace CourierManagement.DataAccess.Services
             using (var dbContext = new ApplicationDbContext())
             {
                 return (from deliveries in dbContext.Deliveries
-                            join senders in dbContext.Senders on deliveries.SenderId equals senders.Id
-                            join recipients in dbContext.Recipients on deliveries.RecipientId equals recipients.Id
-                            join couriers in dbContext.Couriers on deliveries.DeliveryCourierId equals couriers.Id
-                            select new Delivery
-                            {
-                                Id = deliveries.Id,
-                                SenderId = deliveries.Id,
-                                Sender = deliveries.Sender,
-                                RecipientId = deliveries.Id,
-                                Recipient = deliveries.Recipient,
-                                DeliveryCourierId = deliveries.DeliveryCourierId,
-                                DeliveryCourier = deliveries.DeliveryCourier,
-                                SentDate = deliveries.SentDate,
-                                ReceivedDate = deliveries.ReceivedDate,
-                                Cost = deliveries.Cost,
-                                PaymentType = deliveries.PaymentType,
-                                Length = deliveries.Length,
-                                Width = deliveries.Width,
-                                Height = deliveries.Height,
-                                IsFragile = deliveries.IsFragile
-                            }).ToList();
+                        join senders in dbContext.Senders on deliveries.SenderId equals senders.Id
+                        join recipients in dbContext.Recipients on deliveries.RecipientId equals recipients.Id
+                        join couriers in dbContext.Couriers on deliveries.DeliveryCourierId equals couriers.Id
+                        select new Delivery
+                        {
+                            Id = deliveries.Id,
+                            SenderId = deliveries.Id,
+                            Sender = deliveries.Sender,
+                            RecipientId = deliveries.Id,
+                            Recipient = deliveries.Recipient,
+                            DeliveryCourierId = deliveries.DeliveryCourierId,
+                            DeliveryCourier = deliveries.DeliveryCourier,
+                            SentDate = deliveries.SentDate,
+                            ReceivedDate = deliveries.ReceivedDate,
+                            Cost = deliveries.Cost,
+                            PaymentType = deliveries.PaymentType,
+                            Length = deliveries.Length,
+                            Width = deliveries.Width,
+                            Height = deliveries.Height,
+                            IsFragile = deliveries.IsFragile
+                        }).ToList();
             }
         }
 

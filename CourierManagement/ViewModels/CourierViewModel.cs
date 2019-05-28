@@ -4,7 +4,6 @@ using CourierManagement.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Core;
 
@@ -63,6 +62,86 @@ namespace CourierManagement.ViewModels
             }
         }
 
+        public Gender Gender
+        {
+            get { return courier.Gender; }
+            set
+            {
+                courier.Gender = value;
+                RaisePropertyChanged(nameof(Gender));
+            }
+        }
+
+        public DateTime Birthdate
+        {
+            get { return courier.Birthdate; }
+            set
+            {
+                courier.Birthdate = value;
+                RaisePropertyChanged(nameof(Birthdate));
+            }
+        }
+
+        public string Pesel
+        {
+            get { return courier.Pesel; }
+            set
+            {
+                courier.Pesel = value;
+                RaisePropertyChanged(nameof(Pesel));
+            }
+        }
+
+        public string Address
+        {
+            get { return courier.Address; }
+            set
+            {
+                courier.Address = value;
+                RaisePropertyChanged(nameof(Address));
+            }
+        }
+
+        public string City
+        {
+            get { return courier.City; }
+            set
+            {
+                courier.City = value;
+                RaisePropertyChanged(nameof(City));
+            }
+        }
+
+        public string PostalCode
+        {
+            get { return courier.PostalCode; }
+            set
+            {
+                courier.PostalCode = value;
+                RaisePropertyChanged(nameof(PostalCode));
+            }
+        }
+
+        public string PhoneNumber
+        {
+            get { return courier.PhoneNumber; }
+            set
+            {
+                courier.PhoneNumber = value;
+                RaisePropertyChanged(nameof(PhoneNumber));
+            }
+        }
+
+        public string EmailAddress
+        {
+            get { return courier.EmailAddress; }
+            set
+            {
+                courier.EmailAddress = value;
+                RaisePropertyChanged(nameof(EmailAddress));
+            }
+        }
+
         /// <summary>
         /// Konstruktor modelu widoku kuriera
         /// </summary>
@@ -85,7 +164,7 @@ namespace CourierManagement.ViewModels
         /// </summary>
         private async void AcceptExecute()
         {
-            await Task.CompletedTask;
+            await DataService.AddToDatabaseAsync(courier).ConfigureAwait(false);
         }
     }
 }

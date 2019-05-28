@@ -1,7 +1,6 @@
 ﻿using CourierManagement.Core.Models;
 using CourierManagement.DataAccess.Data;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 

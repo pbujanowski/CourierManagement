@@ -1,10 +1,8 @@
-﻿using System;
+﻿using CourierManagement.Core.Models;
+using CourierManagement.DataAccess.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CourierManagement.Core.Models;
-using CourierManagement.DataAccess.Data;
 
 namespace CourierManagement.DataAccess.Services
 {

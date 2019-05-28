@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using CourierManagement.Core.Models;
+﻿using CourierManagement.Core.Models;
 using CourierManagement.DataAccess.Data;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CourierManagement.DataAccess.Services
 {
