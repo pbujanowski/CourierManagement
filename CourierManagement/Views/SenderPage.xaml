@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="CourierManagement.Views.SenderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CourierManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="170,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Imię:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,159,0,0" Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}" VerticalAlignment="Top" Width="377"/>
+        
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="170,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Nazwisko:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,200,0,0" Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" VerticalAlignment="Top" Width="377"/>
+        
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="170,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Firma:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,250,0,0" Text="{x:Bind ViewModel.Company, Mode=TwoWay}"  VerticalAlignment="Top" Width="377"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="170,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Adres:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,300,0,0" Text="{x:Bind ViewModel.Address, Mode=TwoWay}"  VerticalAlignment="Top" Width="377"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="170,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Miasto:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,350,0,0" Text="{x:Bind ViewModel.City, Mode=TwoWay}"  VerticalAlignment="Top" Width="377"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="170,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Kod pocztowy:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,400,0,0" Text="{x:Bind ViewModel.PostalCode, Mode=TwoWay}"  VerticalAlignment="Top" Width="377"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="170,450,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Numer telefonu:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,450,0,0" Text="{x:Bind ViewModel.PhoneNumber, Mode=TwoWay}"  VerticalAlignment="Top" Width="377"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="170,500,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"><Run Text="Email:"/><LineBreak/><Run/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="278,500,0,0" Text="{x:Bind ViewModel.Email, Mode=TwoWay}"  VerticalAlignment="Top" Width="377"/>
+
+
+
+
+        <Button Content="Zwrot" Command="{x:Bind ViewModel.AcceptCommand, Mode=TwoWay}" HorizontalAlignment="Left" Margin="593,560,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.484,0.469"/>
+
+
+    </Grid>
+</Page>
